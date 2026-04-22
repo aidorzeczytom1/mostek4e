@@ -1,1 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Made Simple · Book 4 · Ready-to-Copy Prompts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link href="./AI Made Simple · Book 4 · Ready-to-Copy Prompts_files/css2" rel="stylesheet">
+  <style>
+    :root {
+      --navy:       #0E1C36;
+      --navy-card:  #162035;
+      --navy-inner: #0A1526;
+      --blue:       #2563EB;
+      --blue-light: #3B82F6;
+      --glow:       #818CF8;
+      --orange:     #F97316;
+      --orange-dim: #C2570A;
+      --white:      #F1F5F9;
+      --muted:      #94A3B8;
+      --border:     #1E3050;
+      --green:      #22C55E;
+      --green-dim:  #15803D;
+      --red:        #EF4444;
+    }
 
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    /* ── EKRAN LOGOWANIA ── */
+    #ekran-logowania {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px;
+      overflow-y: auto;
+    }
+
+    .logowanie-wrapper {
+      margin: auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .login-box {
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 48px 40px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+    }
+
+    .login-box::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 160px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--orange), transparent);
+    }
+
+    .login-badge {
+      display: inline-block;
+      background: rgba(249,115,22,0.1);
+      color: var(--orange);
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(249,115,22,0.3);
+      margin-bottom: 20px;
+    }
+
+    .login-box h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #fff 30%, var(--glow) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .login-box p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .login-box p strong {
+      color: var(--white);
+    }
+
+    .kod-input {
+      width: 100%;
+      background: var(--navy-inner);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 1.1rem;
+      font-family: 'Outfit', monospace;
+      font-weight: 700;
+      color: var(--white);
+      text-align: center;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+
+    .kod-input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+    }
+
+    .kod-input.error {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(239,68,68,0.2);
+      animation: shake 0.4s ease;
+    }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25%      { transform: translateX(-8px); }
+      75%      { transform: translateX(8px); }
+    }
+
+    .btn-odblokuj {
+      width: 100%;
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+      margin-bottom: 16px;
+    }
+
+    .btn-odblokuj:hover {
+      background: var(--blue-light);
+      box-shadow: 0 0 20px rgba(37,99,235,0.4);
+    }
+
+    .btn-odblokuj:active { transform: scale(0.98); }
+
+    .error-msg {
+      font-size: 0.85rem;
+      color: var(--red);
+      min-height: 20px;
+      margin-bottom: 8px;
+    }
+
+    .login-hint {
+      font-size: 0.78rem;
+      color: #475569;
+      margin-top: 16px;
+    }
+
+    .upsell-block {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      text-align: left;
+    }
+
+    .upsell-label {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--orange);
+      background: rgba(249,115,22,0.1);
+      border: 1px solid rgba(249,115,22,0.25);
+      border-radius: 5px;
+      padding: 2px 9px;
+      margin-bottom: 10px;
+    }
+
+    .upsell-block p {
+      font-size: 0.88rem;
+      color: #CBD5E1;
+      line-height: 1.65;
+      margin-bottom: 14px;
+    }
+
+    .upsell-block p strong {
+      color: var(--white);
+    }
+
+    .btn-amazon {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--orange);
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: background 0.2s, box-shadow 0.2s;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-amazon:hover {
+      background: #ea6c0a;
+      box-shadow: 0 0 18px rgba(249,115,22,0.4);
+    }
+
+    .amazon-disclaimer {
+      margin: 16px auto 0;
+      padding: 12px 18px;
+      background: rgba(37,99,235,0.06);
+      border: 1px solid rgba(37,99,235,0.15);
+      border-radius: 8px;
+      font-size: 0.78rem;
+      color: #64748B;
+      line-height: 1.6;
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+    }
+
+    /* ── GŁÓWNA TREŚĆ (ukryta domyślnie) ── */
+    #tresc {
+      display: none;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: relative;
+      text-align: center;
+      padding: 56px 24px 44px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    }
+
+    .header-glow {
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 200px;
+      background: radial-gradient(ellipse, rgba(37,99,235,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .tom-badge {
+      display: inline-block;
+      background: var(--orange-dim);
+      color: var(--orange);
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--orange-dim);
+      margin-bottom: 18px;
+    }
+
+    header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2rem, 5vw, 2.9rem);
+      font-weight: 800;
+      line-height: 1.5;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #fff 30%, var(--glow) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    header .subtitle {
+      font-size: 1.3rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .header-tip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(37,99,235,0.12);
+      border: 1px solid rgba(37,99,235,0.3);
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 0.85rem;
+      color: #93C5FD;
+      max-width: 520px;
+    }
+
+    /* ── NAW ── */
+    .chapter-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(14,28,54,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 20px;
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .chapter-nav::-webkit-scrollbar { display: none; }
+
+    .nav-item {
+      flex-shrink: 0;
+      padding: 14px 16px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .nav-item:hover { color: var(--white); }
+    .nav-item.active { color: var(--orange); border-bottom-color: var(--orange); }
+
+    /* ── MAIN ── */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    .chapter { padding-top: 48px; }
+
+    .chapter-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+      padding-top: 12px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .chapter-info h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 3px;
+    }
+
+    .chapter-info p { font-size: 0.82rem; color: var(--muted); }
+
+    .komenda-card {
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .komenda-card:hover {
+      border-color: rgba(37,99,235,0.4);
+      box-shadow: 0 4px 24px rgba(37,99,235,0.08);
+    }
+
+    .komenda-head {
+      display: flex;
+      align-items: center;
+      padding: 14px 18px 10px;
+      gap: 12px;
+    }
+
+    .komenda-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .komenda-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--orange);
+      background: rgba(249,115,22,0.1);
+      border: 1px solid rgba(249,115,22,0.2);
+      border-radius: 5px;
+      padding: 2px 8px;
+      flex-shrink: 0;
+      letter-spacing: 0.05em;
+    }
+
+    .komenda-title {
+      font-size: 0.93rem;
+      font-weight: 600;
+      color: var(--white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .komenda-body { padding: 0 18px 16px; }
+
+    .komenda-tekst {
+      background: var(--navy-inner);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: 0.875rem;
+      line-height: 1.7;
+      color: #CBD5E1;
+      white-space: pre-wrap;
+      margin-bottom: 12px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .komenda-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-kopiuj {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 7px;
+      padding: 8px 18px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .btn-kopiuj:hover { background: var(--blue-light); box-shadow: 0 0 16px rgba(37,99,235,0.4); }
+    .btn-kopiuj:active { transform: scale(0.96); }
+    .btn-kopiuj.success { background: var(--green-dim); }
+    .btn-kopiuj.error   { background: #991B1B; }
+
+    .copy-hint { font-size: 0.78rem; color: var(--muted); }
+
+    .progress-bar {
+      background: rgba(37,99,235,0.1);
+      border: 1px solid rgba(37,99,235,0.2);
+      border-radius: 6px;
+      padding: 12px 18px;
+      margin-bottom: 32px;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .progress-track {
+      flex: 1;
+      height: 5px;
+      background: var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--blue), var(--glow));
+      border-radius: 999px;
+      transition: width 0.4s ease;
+    }
+
+    .progress-label { font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
+    .progress-count { font-size: 0.78rem; color: #93C5FD; font-weight: 600; white-space: nowrap; }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 32px 20px;
+      text-align: center;
+    }
+
+    .footer-tomy {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .footer-tom-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .footer-tom-link.current {
+      background: rgba(249,115,22,0.15);
+      border: 1px solid rgba(249,115,22,0.3);
+      color: var(--orange);
+      cursor: default;
+    }
+
+    .footer-tom-link.coming {
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .footer-tom-link.coming:hover { border-color: rgba(37,99,235,0.3); color: #93C5FD; }
+    .footer-copy { font-size: 0.78rem; color: #475569; }
+
+    /* ── NEWSLETTER & REVIEW SECTIONS ── */
+    .bonus-section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px 48px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .bonus-card {
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px 36px;
+      margin-bottom: 20px;
+    }
+
+    .bonus-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .bonus-card-icon { font-size: 1.5rem; line-height: 1; }
+
+    .bonus-card h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .bonus-card p {
+      font-size: 0.9rem;
+      color: #CBD5E1;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .bonus-card p small { color: #475569; font-size: 0.78rem; }
+
+    .review-card {
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--orange);
+      border-radius: 14px;
+      padding: 32px 36px;
+      text-align: center;
+    }
+
+    .review-card h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .review-card p {
+      font-size: 0.9rem;
+      color: #CBD5E1;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .review-card p .highlight { color: var(--orange); font-weight: 600; }
+
+    .review-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-review {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--orange);
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-review:hover {
+      background: #ea6c0a;
+      box-shadow: 0 0 16px rgba(249,115,22,0.4);
+    }
+
+    @media (max-width: 540px) {
+      header { padding: 40px 16px 32px; }
+      .login-box { padding: 36px 24px; }
+      .btn-kopiuj { width: 100%; justify-content: center; }
+      .komenda-actions { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ── DOMINATE HEADLINE ── */
+    .dominate-headline {
+      font-family: 'Outfit', Arial, sans-serif;
+      font-size: clamp(1.1rem, 3.5vw, 1.75rem);
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #F97316 0%, #FBBF24 40%, #F97316 80%, #FB923C 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s linear infinite;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+      filter: drop-shadow(0 0 18px rgba(249,115,22,0.45));
+    }
+    @keyframes shimmer {
+      from { background-position: 0% center; }
+      to   { background-position: 200% center; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="ekran-logowania">
+  <div class="logowanie-wrapper">
+    <div style="text-align:center;margin-bottom:28px;">
+      <div class="dominate-headline" style="margin-bottom:6px;">DON&rsquo;T FEAR AI: DOMINATE YOUR FUTURE</div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:1rem;color:var(--muted);letter-spacing:0.02em;">AI Made Simple</div>
+    </div>
+    
+    <div class="login-box">
+      <div class="login-badge">Book 4 · AI Made Simple</div>
+      <h1>Access code</h1>
+      <p>Enter the code from the last page of your e-book<br><strong>AI Made Simple — Book 4</strong></p>
+      <input type="text" id="kod-input" class="kod-input" placeholder="BOOK4-XXXX" maxlength="10" autocomplete="off" spellcheck="false">
+      <div class="error-msg" id="error-msg"></div>
+      <button class="btn-odblokuj" onclick="sprawdzKod()">🔓 Unlock prompts</button>
+      <p class="login-hint">Your code is on the last page of the e-book</p>
+
+      <div class="upsell-block">
+        <span class="upsell-label">🔒 What's inside</span>
+        <p>Unlock <strong>9 ready-to-copy AI prompts</strong> for finding the perfect film, family viewing, hidden streaming gems, and more. This companion page makes copying them effortless.<br><br>Don't have Book 4 yet?</p>
+        <a class="btn-amazon" href="https://ebooks.aidorzeczy.com/" target="_blank" rel="noopener">📖 Get it on Amazon →</a>
+      </div>
+
+      <div class="upsell-block" style="margin-top:20px;">
+        <span class="upsell-label">✉️ Free newsletter</span>
+        <p>Not ready to buy yet? <strong>Get free AI tips, new prompts &amp; updates</strong> — straight to your inbox. No spam, unsubscribe any time.</p>
+        
+        <div style="display:flex;align-items:center;gap:14px;margin:14px 0 10px;flex-wrap:wrap;">
+          <span style="font-size:2rem;animation:pointRight 1.2s ease-in-out infinite;display:inline-block;">&#x1F449;</span>
+          <a href="https://ebooks.aidorzeczy.com/#community" target="_blank" rel="noopener"
+             style="display:inline-flex;align-items:center;text-decoration:none;background:#2563eb;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:700;padding:11px 22px;border-radius:8px;box-shadow:0 4px 16px rgba(37,99,235,0.4);">
+            Sign me up →
+          </a>
+        </div>
+        <style>@keyframes pointRight{0%,100%{transform:translateX(0)}50%{transform:translateX(9px)}}</style>
+        
+        <p style="margin-top:10px;margin-bottom:0;font-size:0.72rem;color:#475569;line-height:1.6;">By signing up, you agree to receive my newsletter and the free bonus. We process your email via Mailchimp to deliver this content. You can unsubscribe at any time. See our <a href="https://privacy.aidorzeczy.com" target="_blank" rel="noopener" style="color:#64748B;text-decoration:underline;">Privacy Policy</a> for details.</p>
+      </div>
+    </div>
+
+    <p class="amazon-disclaimer">
+      This page is a free, optional companion to <em>AI Made Simple — Book 4</em> (available on Amazon), provided solely to make copying prompts more convenient. All prompts shown here are also available in full text inside the purchased e-book.
+    </p>
+  </div>
+</div>
+
+<div id="tresc">
+
+<header>
+  <div class="header-glow"></div>
+  <div class="dominate-headline">DON’T FEAR AI: DOMINATE YOUR FUTURE</div>
+  <div class="header-series">AI Made Simple</div>
+  <h1 style="font-size:clamp(1rem,2.5vw,1.5rem);font-weight:700;">Book 4: What to Watch?<br>Stop Scrolling. Find the Perfect Film in 2 Minutes.</h1>
+  <div class="header-tagline">Don't Fear AI — No Tech Skills Needed</div>
+  <div class="header-subtitle-small">A plain-English guide for everyone. · Leszek Ignatowicz · book4.aidorzeczy.com</div>
+  <div class="header-tip">
+    <span class="icon">💡</span>
+    Click <strong>Copy prompt</strong>, then paste it into ChatGPT
+  </div>
+</header>
+
+<nav class="chapter-nav" id="chapNav">
+  <a class="nav-item active" href="https://book4.aidorzeczy.com/#r1" onclick="setActive(this)">Ch. 1 — Scratch</a>
+  <a class="nav-item" href="https://book4.aidorzeczy.com/#r2" onclick="setActive(this)">Ch. 2 — Family</a>
+  <a class="nav-item" href="https://book4.aidorzeczy.com/#r3" onclick="setActive(this)">Ch. 3 — Feeling</a>
+  <a class="nav-item" href="https://book4.aidorzeczy.com/#r4" onclick="setActive(this)">Ch. 4 — Briefing</a>
+  <a class="nav-item" href="https://book4.aidorzeczy.com/#r5" onclick="setActive(this)">Ch. 5 — Hidden</a>
+  <div class="nav-sep"></div>
+  <a class="nav-item" href="https://book4.aidorzeczy.com/#cheatsheet" onclick="setActive(this)">Cheat Sheet</a>
+  <a class="nav-item" href="https://book4.aidorzeczy.com/#advanced" onclick="setActive(this)">Advanced</a>
+</nav>
+
+<main>
+
+  <div class="progress-bar">
+    <span class="progress-label">Prompts copied:</span>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="progress-count" id="progressCount">0 / 9</span>
+  </div>
+
+  <section class="chapter" id="r1">
+    <div class="chapter-header">
+      <div class="chapter-icon">🍿</div>
+      <div class="chapter-info">
+        <h2>Chapter 1: The Friday Night Fix</h2>
+        <p>Finding a Film From Scratch — When You Have No Idea What You Want</p>
+      </div>
+    </div>
+    <div class="komenda-card">
+      <div class="komenda-head">
+        <div class="komenda-label">
+          <span class="komenda-num">No. 1</span>
+          <span class="komenda-title">Prompt No. 1 — The Friday Night Fix</span>
+        </div>
+      </div>
+      <div class="komenda-body">
+        <div class="komenda-tekst" id="k1">Act as a personal film critic who knows me well.
+
+Suggest 4 films perfectly matched to my mood tonight.
+
+"My mood right now: [e.g. tired and want something easy / excited and up for something gripping / sad and need something uplifting]"
+
+"Time available: [e.g. about 90 minutes / up to 2 hours / no preference]"
+
+"Language: [e.g. English only / subtitles are fine / no preference]"
+
+"Streaming services I have: [e.g. Netflix / Amazon Prime Video / Disney+ / Apple TV+ / HBO Max / Hulu — list all you have, or write ""I'll rent if it's worth it""]"
+
+"Hard exclusions — I do NOT want: [e.g. no horror / nothing violent / no subtitles / nothing too heavy or depressing]"
+
+"For each film, tell me:"
+1. Title and year
+2. Where to watch it (exact platform name)
+3. Why it fits my mood tonight — one sentence
+4. Running time
+"No spoilers, please."</div>
+        <div class="komenda-actions">
+          <button class="btn-kopiuj" onclick="kopiuj(&#39;k1&#39;, this)">📋 Copy prompt</button>
+          <span class="copy-hint">Ctrl+V or long-press → Paste</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="r2">
+    <div class="chapter-header">
+      <div class="chapter-icon">👨‍👩‍👧‍👦</div>
+      <div class="chapter-info">
+        <h2>Chapter 2: The Family Compromise</h2>
+        <p>Finding a Film Everyone Will Actually Watch</p>
+      </div>
+    </div>
+    <div class="komenda-card">
+      <div class="komenda-head">
+        <div class="komenda-label">
+          <span class="komenda-num">No. 2</span>
+          <span class="komenda-title">Prompt No. 2 — The Family Compromise</span>
+        </div>
+      </div>
+      <div class="komenda-body">
+        <div class="komenda-tekst" id="k2">Act as a family film specialist.
+
+"Find a film that genuinely works for everyone in our group — not just something technically suitable for the youngest viewer, but something all of us will actually enjoy."
+
+"The people watching: [List ages, e.g. two adults aged 38 and 42, one teenager aged 15, two children aged 7 and 9]"
+
+"Hard limits for the children: [e.g. nothing scary / no strong language / nothing too intense / no animal harm]"
+
+"What the adults and teenagers want: [e.g. a proper story / real humour / genuine adventure — not too slow]"
+
+"Maximum running time: [e.g. under 2 hours / we're flexible]"
+
+"Streaming services we have: [e.g. Netflix / Disney+ / Amazon Prime Video / Apple TV+ / or ""we'll rent if it's great""]"
+
+Please suggest 4 films and for each one:
+1. Title and year
+2. Where to watch it (exact platform name)
+3. Why it works for each age group in our household — two sentences
+4. Running time
+No spoilers.</div>
+        <div class="komenda-actions">
+          <button class="btn-kopiuj" onclick="kopiuj(&#39;k2&#39;, this)">📋 Copy prompt</button>
+          <span class="copy-hint">Ctrl+V or long-press → Paste</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="r3">
+    <div class="chapter-header">
+      <div class="chapter-icon">❤️</div>
+      <div class="chapter-info">
+        <h2>Chapter 3: The Feeling Finder</h2>
+        <p>Finding Films That Give You the Same Feeling as One You Already Love</p>
+      </div>
+    </div>
+    <div class="komenda-card">
+      <div class="komenda-head">
+        <div class="komenda-label">
+          <span class="komenda-num">No. 3</span>
+          <span class="komenda-title">Prompt No. 3 — The Feeling Finder</span>
+        </div>
+      </div>
+      <div class="komenda-body">
+        <div class="komenda-tekst" id="k3">Act as a film expert with encyclopaedic knowledge of cinema across all eras and countries.
+
+"I loved a specific film and I want to find others that give me the same feeling — not the same genre or director, but the same emotional and atmospheric experience."
+
+"The film I loved: [Title and year, e.g. Knives Out (2019) / The Grand Budapest Hotel (2014)]"
+
+"What I specifically loved about it: [Describe in your own words, e.g. the dry, witty humour / the slow build of tension / the unexpected twist at the end / the warm, nostalgic atmosphere / the relationship between the two leads / the gorgeous visuals]"
+
+"What I do NOT want repeated: [e.g. I didn't love the pacing in the middle / please avoid science fiction / nothing too long]"
+
+"Streaming services I have: [e.g. Netflix / Amazon Prime Video / Disney+ / Apple TV+ / or ""I'll rent if it's excellent""]"
+
+Please suggest 4 or 5 films — from any era or country — that match the feeling I described. For each:
+1. Title and year
+"2. Where to watch it (exact platform name, or ""available to rent"")"
+3. Why it matches the feeling — two sentences
+No spoilers.</div>
+        <div class="komenda-actions">
+          <button class="btn-kopiuj" onclick="kopiuj(&#39;k3&#39;, this)">📋 Copy prompt</button>
+          <span class="copy-hint">Ctrl+V or long-press → Paste</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="r4">
+    <div class="chapter-header">
+      <div class="chapter-icon">🛡️</div>
+      <div class="chapter-info">
+        <h2>Chapter 4: The Pre-Watch Briefing</h2>
+        <p>Is This Film Actually Worth Two Hours of Your Life?</p>
+      </div>
+    </div>
+    <div class="komenda-card">
+      <div class="komenda-head">
+        <div class="komenda-label">
+          <span class="komenda-num">No. 4</span>
+          <span class="komenda-title">Prompt No. 4 — The Pre-Watch Briefing</span>
+        </div>
+      </div>
+      <div class="komenda-body">
+        <div class="komenda-tekst" id="k4">Act as an honest film advisor. I want to know whether a specific film is right for me tonight — without having the plot spoiled.
+
+"The film: [Title and year, e.g. The Banshees of Inisherin (2022)]"
+
+Please answer the following — with NO plot spoilers:
+
+"1. Pacing: Does it hook you immediately, or does it build slowly? When does it really get going?"
+
+"2. Tone: Is it genuinely funny, mostly heavy, a mix of both — or something else entirely?"
+
+"3. Content I want flagged: [List what matters to you, e.g. level of violence / strong language / any animal harm / intense grief or loss / jump scares / disturbing imagery]"
+
+"4. Ending feel: Without spoiling it — does it leave you uplifted, unsettled, or somewhere in between?"
+
+5. Who would NOT enjoy this? Be direct — what type of viewer should skip it?
+
+Keep every answer spoiler-free throughout.</div>
+        <div class="komenda-actions">
+          <button class="btn-kopiuj" onclick="kopiuj(&#39;k4&#39;, this)">📋 Copy prompt</button>
+          <span class="copy-hint">Ctrl+V or long-press → Paste</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="r5">
+    <div class="chapter-header">
+      <div class="chapter-icon">💎</div>
+      <div class="chapter-info">
+        <h2>Chapter 5: The Hidden Catalogue</h2>
+        <p>Stop Paying for Extra Rentals — the Brilliant Films You Already Have Access To</p>
+      </div>
+    </div>
+    <div class="komenda-card">
+      <div class="komenda-head">
+        <div class="komenda-label">
+          <span class="komenda-num">No. 5</span>
+          <span class="komenda-title">Prompt No. 5 — The Hidden Catalogue</span>
+        </div>
+      </div>
+      <div class="komenda-body">
+        <div class="komenda-tekst" id="k5">Act as an expert film curator who knows streaming catalogues in depth.
+
+I want to find a genuinely excellent film I haven't seen yet — one that's already on a platform I subscribe to and that the platform's own algorithm would never show me.
+
+"Platforms I subscribe to: [e.g. Netflix / Amazon Prime Video / Disney+ / Apple TV+ / HBO Max / Hulu — list them all]"
+
+"My country or region: [e.g. United Kingdom / United States / Australia / Poland — this affects what's available]"
+
+"What I'm in the mood for: [e.g. a gripping thriller / a warm and funny comedy / a brilliant drama / a foreign language film with great storytelling]"
+
+"Films I've already seen recently (skip these): [List 3 or 4 recent watches]"
+
+"Avoid: [e.g. nothing too dark / no horror / skip anything that got excessive awards hype — I want underseen, not just critically acclaimed]"
+
+Please suggest 4 to 5 films. For each one:
+1. Title and year
+2. Which platform it's on in my region
+3. Why it's excellent — two sentences
+4. Why it tends to go unnoticed
+No spoilers.</div>
+        <div class="komenda-actions">
+          <button class="btn-kopiuj" onclick="kopiuj(&#39;k5&#39;, this)">📋 Copy prompt</button>
+          <span class="copy-hint">Ctrl+V or long-press → Paste</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="cheatsheet">
+    <div class="chapter-header">
+      <div class="chapter-icon">📌</div>
+      <div class="chapter-info">
+        <h2>Cheat Sheet — All Prompts at a Glance</h2>
+        <p>Prompts No. 1–5 in short form · Use the full chapter versions for best results</p>
+      </div>
+    </div>
+    <div class="komenda-card">
+      <div class="komenda-body" style="padding:20px 24px;">
+        <p style="color:var(--muted);font-size:0.88rem;margin-bottom:12px;">These are condensed versions. The full prompts in each chapter give the AI more context and produce better results.</p>
+        
+        <p style="color:var(--white);font-size:0.9rem;margin:0;">
+          <strong>No. 1</strong> — Finding a film from scratch → Ch. 1 &nbsp;|&nbsp;
+          <strong>No. 2</strong> — Family film night → Ch. 2 &nbsp;|&nbsp;
+          <strong>No. 3</strong> — Films with the same feeling → Ch. 3 &nbsp;|&nbsp;
+          <strong>No. 4</strong> — Pre-watch briefing → Ch. 4 &nbsp;|&nbsp;
+          <strong>No. 5</strong> — Hidden gems on subscriptions → Ch. 5
+        </p>
+
+        <p style="color:var(--muted);font-size:0.85rem;margin-top:12px;">All prompts also available at <a href="https://book4.aidorzeczy.com/" style="color:var(--orange);">book4.aidorzeczy.com</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="advanced">
+    <div class="chapter-header">
+      <div class="chapter-icon">🚀</div>
+      <div class="chapter-info">
+        <h2>Advanced Prompts — Appendix 2</h2>
+        <p>Prompts No. 6–9 · More powerful versions for specific situations</p>
+      </div>
+    </div>
+
+    <div class="komenda-card">
+      <div class="komenda-head">
+        <div class="komenda-label">
+          <span class="komenda-num">No. 6</span>
+          <span class="komenda-title">Prompt No. 6 — Planning a themed film marathon</span>
+        </div>
+      </div>
+      <div class="komenda-body">
+        <div class="komenda-tekst" id="k6">Act as a film programming expert.
+
+"I want to plan a themed film marathon — a sequence of films that work together across a day or evening, building in quality and variety."
+
+"The theme: [e.g. heist films / psychological thrillers / classic comedies / 1990s action films / films set in one location]"
+"Number of films: [e.g. 3 films / 4 films / as many as fit in 8 hours]"
+"Total time available: [e.g. all day Saturday / from 6pm to midnight]"
+"Who's watching: [ages and any content limits]"
+"Streaming services: [e.g. Netflix / Prime Video / Disney+ / Apple TV+ — or ""happy to rent""]"
+
+Suggest the films in viewing order and explain why that order works. Include platform and running time for each. No spoilers.</div>
+        <div class="komenda-actions">
+          <button class="btn-kopiuj" onclick="kopiuj(&#39;k6&#39;, this)">📋 Copy prompt</button>
+          <span class="copy-hint">Ctrl+V or long-press → Paste</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="komenda-card">
+      <div class="komenda-head">
+        <div class="komenda-label">
+          <span class="komenda-num">No. 7</span>
+          <span class="komenda-title">Prompt No. 7 — Family film night gone deeper</span>
+        </div>
+      </div>
+      <div class="komenda-body">
+        <div class="komenda-tekst" id="k7">Act as a family film specialist with deep knowledge of lesser-known cinema.
+
+"We've already seen all the obvious family films — Pixar, DreamWorks, the Disney classics — and we need to go deeper into the catalogue."
+
+"The people watching: [ages of everyone]"
+"Films we've already seen and loved: [list 4 or 5]"
+"What works best for our group: [e.g. adventure / comedy / gentle drama / animation from any country]"
+"Hard limits: [e.g. nothing scary / no adult themes]"
+"Streaming services: [e.g. Netflix / Disney+ / Amazon Prime Video / Apple TV+]"
+"Our region: [e.g. UK / US / Canada]"
+
+"Find us 4 genuinely brilliant family films we're unlikely to have heard of. Title, year, platform, and why it works for our specific age range. No spoilers."</div>
+        <div class="komenda-actions">
+          <button class="btn-kopiuj" onclick="kopiuj(&#39;k7&#39;, this)">📋 Copy prompt</button>
+          <span class="copy-hint">Ctrl+V or long-press → Paste</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="komenda-card">
+      <div class="komenda-head">
+        <div class="komenda-label">
+          <span class="komenda-num">No. 8</span>
+          <span class="komenda-title">Prompt No. 8 — Exploring a new genre</span>
+        </div>
+      </div>
+      <div class="komenda-body">
+        <div class="komenda-tekst" id="k8">Act as a cinema guide for someone exploring a new genre or national cinema for the first time.
+
+"I want to explore: [e.g. Korean films / classic Hollywood from the 1970s / Italian cinema / Japanese animation for adults / French comedies / Scandinavian crime films]"
+
+"My experience level: [e.g. I'm a complete beginner / I've seen one or two and liked them]"
+"Genres or tones I usually enjoy: [e.g. thrillers / dramas / dark comedies / character-driven stories]"
+"Things I want to avoid: [e.g. extremely slow pacing / very dark subject matter / subtitles longer than 2 hours]"
+"Streaming services: [e.g. Netflix / Amazon Prime Video / Apple TV+ — or ""happy to rent""]"
+
+Give me a 3-film starter sequence — ordered from most accessible to most rewarding — with a one-sentence reason each and platform name. No spoilers.</div>
+        <div class="komenda-actions">
+          <button class="btn-kopiuj" onclick="kopiuj(&#39;k8&#39;, this)">📋 Copy prompt</button>
+          <span class="copy-hint">Ctrl+V or long-press → Paste</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="komenda-card">
+      <div class="komenda-head">
+        <div class="komenda-label">
+          <span class="komenda-num">No. 9</span>
+          <span class="komenda-title">Prompt No. 9 — Is a TV series worth starting</span>
+        </div>
+      </div>
+      <div class="komenda-body">
+        <div class="komenda-tekst" id="k9">Act as an honest TV series advisor. I want to know whether a series is worth starting — without spoilers.
+
+"The series: [Title, e.g. Succession / The Wire / Severance / Dark]"
+
+Please tell me — with no plot spoilers:
+1. How many episodes before it gets good? Be honest.
+"2. What's the real tone — not the marketing description, but how it actually feels?"
+"3. Content I want flagged: [e.g. violence / strong language / sexual content / themes of grief or addiction]"
+4. Which season or episode is the high point?
+5. Is there a natural stopping point if I run out of time — i.e. a good place to pause without it feeling incomplete?
+6. Who should skip this entirely? Be direct.
+
+"Where to watch it: [e.g. tell me which platform carries it in the UK / US / my region: [your country]]"
+
+Keep everything spoiler-free.</div>
+        <div class="komenda-actions">
+          <button class="btn-kopiuj" onclick="kopiuj(&#39;k9&#39;, this)">📋 Copy prompt</button>
+          <span class="copy-hint">Ctrl+V or long-press → Paste</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<div class="bonus-section">
+
+  <div class="bonus-card">
+    <div class="bonus-card-header">
+      <div class="bonus-card-icon">✉️</div>
+      <h3>Join the AI community and get your bonuses</h3>
+    </div>
+    <p>Sign up for my free newsletter to receive updates on new prompts, AI tool news, and upcoming books in the series.</p>
+    
+    <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin:22px 0 14px;flex-wrap:wrap;">
+      <span style="font-size:2.2rem;animation:pointRight 1.2s ease-in-out infinite;display:inline-block;">&#x1F449;</span>
+      <a href="https://ebooks.aidorzeczy.com/#community" target="_blank" rel="noopener"
+         style="display:inline-flex;align-items:center;text-decoration:none;background:#2563eb;color:#fff;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;padding:14px 28px;border-radius:9px;box-shadow:0 4px 20px rgba(37,99,235,0.4);">
+        Sign me up →
+      </a>
+    </div>
+
+    <p style="margin-top:8px;margin-bottom:0;"><small>No spam. Unsubscribe at any time.</small></p>
+    <p style="margin-top:10px;margin-bottom:0;font-size:0.75rem;color:#475569;line-height:1.6;">By signing up, you agree to receive my newsletter and the free bonus. We process your email via Mailchimp to deliver this content. You can unsubscribe at any time. See our <a href="https://privacy.aidorzeczy.com" target="_blank" rel="noopener" style="color:#94A3B8;text-decoration:underline;">Privacy Policy</a> for details.</p>
+  </div>
+
+  <div class="review-card">
+    <h3>Did my prompts make your life easier?</h3>
+    <p>Your opinion is the fuel for this series. If the knowledge in my ebooks saved you time, <span class="highlight">leaving a short, honest review on Amazon takes 30 seconds</span> — and helps me reach more people.</p>
+    <div class="review-buttons">
+      <a class="btn-review" href="https://ebooks.aidorzeczy.com/#book-1-3" target="_blank" rel="noopener">⭐ Review Book 1</a>
+      <a class="btn-review" href="https://ebooks.aidorzeczy.com/#book-1-3" target="_blank" rel="noopener">⭐ Review Book 2</a>
+      <a class="btn-review" href="https://ebooks.aidorzeczy.com/#book-1-3" target="_blank" rel="noopener">⭐ Review Book 3</a>
+      <a class="btn-review" href="https://ebooks.aidorzeczy.com/#book-4-6" target="_blank" rel="noopener">⭐ Review Book 4</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-tomy">
+    <a class="footer-tom-link coming" href="https://book1.aidorzeczy.com/">Book 1 — Communication &amp; Difficult Emails</a>
+    <a class="footer-tom-link coming" href="https://book2.aidorzeczy.com/">Book 2 — Organisation &amp; Planning</a>
+    <a class="footer-tom-link coming" href="https://book3.aidorzeczy.com/">Book 3 — Household Budget</a>
+    <a class="footer-tom-link current" href="https://book4.aidorzeczy.com/#">★ Book 4 — you are here</a>
+  </div>
+  <p class="footer-copy">AI Made Simple · Leszek Ignatowicz · book4.aidorzeczy.com</p>
+  <p class="amazon-disclaimer" style="max-width:680px;margin:12px auto 0;">This page is a free, optional companion to <em>AI Made Simple — Book 4</em> (available on Amazon), provided solely to make copying prompts more convenient. All prompts shown here are also available in full text inside the purchased e-book.</p>
+</footer>
+
+</div><script>
+  // Dostęp chroniony hashem SHA-256 — hasła nie są przechowywane w źródle jako plain text.
+  let _H = [];
+  
+  async function _sha256(msg) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  }
+
+  // Generujemy hashe dynamicznie podczas ładowania (hasła są zakodowane w base64, aby zachować bezpieczeństwo pliku lokalnego)
+  (async function() {
+    _H = [
+      await _sha256(atob('QVlCNQ==')),       // Hash dla AYB5
+      await _sha256(atob('Qk9PSzQtQVlCNQ==')) // Hash dla BOOK4-AYB5
+    ];
+  })();
+
+  const _K = 'b4_acc_v1';
+
+  async function sprawdzKod() {
+    const input = document.getElementById('kod-input');
+    const errorMsg = document.getElementById('error-msg');
+    const raw = input.value.trim().toUpperCase();
+    const variants = [raw, 'BOOK4-' + raw, raw.replace(/^BOOK4-/,'')];
+    
+    const hashes = await Promise.all(variants.map(_sha256));
+    
+    // Upewniamy się, że tablica _H zdążyła się załadować
+    if (_H.length === 0) {
+        _H = [ await _sha256(atob('QVlCNQ==')), await _sha256(atob('Qk9PSzQtQVlCNQ==')) ];
+    }
+
+    if (hashes.some(h => _H.includes(h))) {
+      localStorage.setItem(_K, '1');
+      odblokuj();
+    } else {
+      input.classList.add('error');
+      errorMsg.textContent = 'Incorrect code. Check the last page of your e-book.';
+      setTimeout(() => input.classList.remove('error'), 600);
+    }
+  }
+
+  function odblokuj() {
+    document.getElementById('ekran-logowania').style.display = 'none';
+    document.getElementById('tresc').style.display = 'block';
+  }
+
+  if (localStorage.getItem(_K) === '1') { odblokuj(); }
+
+  document.getElementById('kod-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') sprawdzKod();
+  });
+
+  // ── Kopiowanie ──────────────────────────────────────────
+  const TOTAL = 9;
+  const copied = new Set();
+
+  function updateProgress() {
+    const n = copied.size;
+    document.getElementById('progressCount').textContent = n + ' / ' + TOTAL;
+    document.getElementById('progressFill').style.width = (n / TOTAL * 100) + '%';
+  }
+
+  function kopiuj(id, btn) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const tekst = el.innerText;
+    const resetBtn = () => { btn.textContent = '📋 Copy prompt'; btn.classList.remove('success','error'); };
+
+    if (!navigator.clipboard) {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = tekst; ta.style.position='fixed'; ta.style.opacity='0';
+        document.body.appendChild(ta); ta.focus(); ta.select();
+        document.execCommand('copy'); document.body.removeChild(ta);
+        btn.textContent = '✓ Copied!'; btn.classList.add('success');
+        copied.add(id); updateProgress(); setTimeout(resetBtn, 2500);
+      } catch { btn.textContent='⚠ Error'; btn.classList.add('error'); setTimeout(resetBtn,3500); }
+      return;
+    }
+
+    navigator.clipboard.writeText(tekst)
+      .then(() => { btn.textContent='✓ Copied!'; btn.classList.add('success'); copied.add(id); updateProgress(); setTimeout(resetBtn,2500); })
+      .catch(() => { btn.textContent='⚠ Copy failed'; btn.classList.add('error'); setTimeout(resetBtn,3000); });
+  }
+
+  function setActive(el) {
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  const sections = document.querySelectorAll('.chapter');
+  const navItems = document.querySelectorAll('.nav-item');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navItems.forEach(n => n.classList.toggle('active', n.getAttribute('href')==='#'+id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px' });
+  sections.forEach(s => observer.observe(s));
+
+  // Italicise [placeholder] text inside every prompt block
+  document.querySelectorAll('.komenda-tekst').forEach(function(el) {
+    el.innerHTML = el.innerHTML.replace(/(\[[^\]]*\])/g, '<em style="color:#93C5FD;font-style:italic;">$1</em>');
+  });
+</script>
+
+</body></html>
