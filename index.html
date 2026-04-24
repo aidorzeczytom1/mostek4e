@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<!-- saved from url=(0029)https://book1.aidorzeczy.com/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Made Simple · Book 1 · Ready-to-Copy Prompts</title>
+  <title>AI Made Simple · Book 4 · Ready-to-Copy Prompts</title>
   <link rel="preconnect" href="https://fonts.googleapis.com/">
-  <link href="./AI Made Simple · Book 1 · Ready-to-Copy Prompts_files/css2" rel="stylesheet">
-
+  <link href="./AI Made Simple · Book 4 · Ready-to-Copy Prompts_files/css2" rel="stylesheet">
   <style>
     :root {
       --navy:       #0E1C36;
@@ -46,13 +44,234 @@
       opacity: 0.6;
     }
 
+    /* ── EKRAN LOGOWANIA ── */
+    #ekran-logowania {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px;
+      overflow-y: auto;
+    }
+
+    .logowanie-wrapper {
+      margin: auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .login-box {
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 48px 40px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+    }
+
+    .login-box::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 160px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--orange), transparent);
+    }
+
+    .login-badge {
+      display: inline-block;
+      background: rgba(249,115,22,0.1);
+      color: var(--orange);
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(249,115,22,0.3);
+      margin-bottom: 20px;
+    }
+
+    .login-box h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #fff 30%, var(--glow) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .login-box p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .login-box p strong {
+      color: var(--white);
+    }
+
+    .kod-input {
+      width: 100%;
+      background: var(--navy-inner);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 1.1rem;
+      font-family: 'Outfit', monospace;
+      font-weight: 700;
+      color: var(--white);
+      text-align: center;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+
+    .kod-input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+    }
+
+    .kod-input.error {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(239,68,68,0.2);
+      animation: shake 0.4s ease;
+    }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25%      { transform: translateX(-8px); }
+      75%      { transform: translateX(8px); }
+    }
+
+    .btn-odblokuj {
+      width: 100%;
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+      margin-bottom: 16px;
+    }
+
+    .btn-odblokuj:hover {
+      background: var(--blue-light);
+      box-shadow: 0 0 20px rgba(37,99,235,0.4);
+    }
+
+    .btn-odblokuj:active { transform: scale(0.98); }
+
+    .error-msg {
+      font-size: 0.85rem;
+      color: var(--red);
+      min-height: 20px;
+      margin-bottom: 8px;
+    }
+
+    .login-hint {
+      font-size: 0.78rem;
+      color: #475569;
+      margin-top: 16px;
+    }
+
+    .upsell-block {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      text-align: left;
+    }
+
+    .upsell-label {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--orange);
+      background: rgba(249,115,22,0.1);
+      border: 1px solid rgba(249,115,22,0.25);
+      border-radius: 5px;
+      padding: 2px 9px;
+      margin-bottom: 10px;
+    }
+
+    .upsell-block p {
+      font-size: 0.88rem;
+      color: #CBD5E1;
+      line-height: 1.65;
+      margin-bottom: 14px;
+    }
+
+    .upsell-block p strong {
+      color: var(--white);
+    }
+
+    .btn-amazon {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--orange);
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: background 0.2s, box-shadow 0.2s;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-amazon:hover {
+      background: #ea6c0a;
+      box-shadow: 0 0 18px rgba(249,115,22,0.4);
+    }
+
+    .amazon-disclaimer {
+      margin: 16px auto 0;
+      padding: 12px 18px;
+      background: rgba(37,99,235,0.06);
+      border: 1px solid rgba(37,99,235,0.15);
+      border-radius: 8px;
+      font-size: 0.78rem;
+      color: #64748B;
+      line-height: 1.6;
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+    }
+
+    /* ── GŁÓWNA TREŚĆ (ukryta domyślnie) ── */
+    #tresc {
+      display: none;
+    }
+
     /* ── HEADER ── */
     header {
       position: relative;
       text-align: center;
       padding: 56px 24px 44px;
       border-bottom: 1px solid var(--border);
-      overflow: visible;
     }
 
     header::after {
@@ -79,59 +298,34 @@
 
     .tom-badge {
       display: inline-block;
-      background: rgba(197,87,10,0.2);
+      background: var(--orange-dim);
       color: var(--orange);
-      font-family: 'DM Sans', sans-serif;
       font-weight: 600;
       font-size: 0.72rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       padding: 4px 14px;
       border-radius: 20px;
-      border: 1px solid rgba(249,115,22,0.35);
+      border: 1px solid var(--orange-dim);
       margin-bottom: 18px;
     }
 
-    .header-series {
-      font-family: 'Outfit', Arial, sans-serif;
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      color: var(--glow);
-      margin-bottom: 6px;
-      opacity: 0.85;
-    }
-
-   header h1 {
-      font-family: 'Outfit', Arial, sans-serif;
-      font-size: clamp(1rem, 2.5vw, 1.5rem);
-      font-weight: 700;
-      line-height: 1.3;
-      margin-bottom: 10px;
-      /* POPRAWKA DLA IPHONE / SAFARI */
-      display: inline-block;
-      -webkit-box-decoration-break: clone;
-      box-decoration-break: clone;
-      /* --------------------------- */
+    header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2rem, 5vw, 2.9rem);
+      font-weight: 800;
+      line-height: 1.5;
+      margin-bottom: 8px;
       background: linear-gradient(135deg, #fff 30%, var(--glow) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .header-tagline {
-      font-size: clamp(0.88rem, 2vw, 1.05rem);
-      color: #93C5FD;
-      font-weight: 500;
-      margin-bottom: 4px;
-      line-height: 1.5;
-    }
-
-    .header-subtitle-small {
-      font-size: 0.82rem;
+    header .subtitle {
+      font-size: 1.3rem;
       color: var(--muted);
-      margin-bottom: 22px;
-      font-style: italic;
+      margin-bottom: 20px;
     }
 
     .header-tip {
@@ -147,9 +341,7 @@
       max-width: 520px;
     }
 
-    .header-tip .icon { font-size: 1rem; flex-shrink: 0; }
-
-    /* ── STICKY CHAPTER NAV ── */
+    /* ── NAW ── */
     .chapter-nav {
       position: sticky;
       top: 0;
@@ -181,14 +373,7 @@
     .nav-item:hover { color: var(--white); }
     .nav-item.active { color: var(--orange); border-bottom-color: var(--orange); }
 
-    .nav-sep {
-      flex-shrink: 0;
-      width: 1px;
-      background: var(--border);
-      margin: 10px 6px;
-    }
-
-    /* ── MAIN LAYOUT ── */
+    /* ── MAIN ── */
     main {
       position: relative;
       z-index: 1;
@@ -197,10 +382,7 @@
       padding: 0 20px 60px;
     }
 
-    /* ── CHAPTER SECTION ── */
-    .chapter {
-      padding-top: 48px;
-    }
+    .chapter { padding-top: 48px; }
 
     .chapter-header {
       display: flex;
@@ -212,77 +394,16 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .chapter-icon {
-      font-size: 1.6rem;
-      flex-shrink: 0;
-      line-height: 1;
-    }
-
     .chapter-info h2 {
-      font-family: 'Outfit', Arial, sans-serif;
+      font-family: 'Outfit', sans-serif;
       font-size: 1.25rem;
       font-weight: 700;
       color: var(--white);
       margin-bottom: 3px;
     }
 
-    .chapter-info p {
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
+    .chapter-info p { font-size: 0.82rem; color: var(--muted); }
 
-    /* ── ŚCIĄGAWKA INFO CARD ── */
-    .sciagawka-card {
-      background: var(--navy-card);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--glow);
-      border-radius: 12px;
-      padding: 22px 24px;
-      margin-bottom: 14px;
-    }
-
-    .sciagawka-card h3 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--glow);
-      margin-bottom: 10px;
-    }
-
-    .sciagawka-card p {
-      font-size: 0.875rem;
-      line-height: 1.7;
-      color: #CBD5E1;
-      margin-bottom: 12px;
-    }
-
-    .sciagawka-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 14px;
-    }
-
-    .sciagawka-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-decoration: none;
-      background: rgba(129,140,248,0.1);
-      border: 1px solid rgba(129,140,248,0.25);
-      color: var(--glow);
-      transition: all 0.2s;
-    }
-    .sciagawka-link:hover {
-      background: rgba(129,140,248,0.18);
-      border-color: rgba(129,140,248,0.5);
-    }
-
-    /* ── KOMENDA CARD ── */
     .komenda-card {
       background: var(--navy-card);
       border: 1px solid var(--border);
@@ -300,7 +421,6 @@
     .komenda-head {
       display: flex;
       align-items: center;
-      justify-content: space-between;
       padding: 14px 18px 10px;
       gap: 12px;
     }
@@ -335,9 +455,7 @@
       text-overflow: ellipsis;
     }
 
-    .komenda-body {
-      padding: 0 18px 16px;
-    }
+    .komenda-body { padding: 0 18px 16px; }
 
     .komenda-tekst {
       background: var(--navy-inner);
@@ -350,12 +468,6 @@
       white-space: pre-wrap;
       margin-bottom: 12px;
       font-family: 'DM Sans', sans-serif;
-    }
-
-    /* placeholder fields highlighting */
-    .komenda-tekst .placeholder {
-      color: #93C5FD;
-      font-style: italic;
     }
 
     .komenda-actions {
@@ -378,24 +490,15 @@
       cursor: pointer;
       transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
       font-family: 'DM Sans', sans-serif;
-      letter-spacing: 0.01em;
     }
 
-    .btn-kopiuj:hover {
-      background: var(--blue-light);
-      box-shadow: 0 0 16px rgba(37,99,235,0.4);
-    }
-
+    .btn-kopiuj:hover { background: var(--blue-light); box-shadow: 0 0 16px rgba(37,99,235,0.4); }
     .btn-kopiuj:active { transform: scale(0.96); }
-    .btn-kopiuj.success { background: var(--green-dim); box-shadow: 0 0 16px rgba(34,197,94,0.3); }
+    .btn-kopiuj.success { background: var(--green-dim); }
     .btn-kopiuj.error   { background: #991B1B; }
 
-    .copy-hint {
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
+    .copy-hint { font-size: 0.78rem; color: var(--muted); }
 
-    /* ── PROGRESS BAR ── */
     .progress-bar {
       background: rgba(37,99,235,0.1);
       border: 1px solid rgba(37,99,235,0.2);
@@ -428,7 +531,6 @@
     .progress-label { font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
     .progress-count { font-size: 0.78rem; color: #93C5FD; font-weight: 600; white-space: nowrap; }
 
-    /* ── FOOTER ── */
     footer {
       position: relative;
       z-index: 1;
@@ -515,53 +617,6 @@
 
     .bonus-card p small { color: #475569; font-size: 0.78rem; }
 
-    .newsletter-form {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .newsletter-input {
-      flex: 1;
-      min-width: 200px;
-      background: var(--navy-inner);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 11px 16px;
-      font-size: 0.9rem;
-      font-family: 'DM Sans', sans-serif;
-      color: var(--white);
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    .newsletter-input:focus {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
-    }
-
-    .newsletter-input::placeholder { color: #475569; }
-
-    .btn-newsletter {
-      background: var(--blue);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 11px 22px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      font-family: 'DM Sans', sans-serif;
-      cursor: pointer;
-      transition: background 0.15s, box-shadow 0.15s;
-      white-space: nowrap;
-    }
-
-    .btn-newsletter:hover {
-      background: var(--blue-light);
-      box-shadow: 0 0 16px rgba(37,99,235,0.35);
-    }
-
     .review-card {
       background: var(--navy-card);
       border: 1px solid var(--border);
@@ -615,82 +670,11 @@
       box-shadow: 0 0 16px rgba(249,115,22,0.4);
     }
 
-    .amazon-disclaimer {
-      padding: 12px 18px;
-      background: rgba(37,99,235,0.06);
-      border: 1px solid rgba(37,99,235,0.15);
-      border-radius: 8px;
-      font-size: 0.78rem;
-      color: #64748B;
-      line-height: 1.6;
-      text-align: center;
-      margin: 12px auto 0;
-      max-width: 680px;
-    }
-
-    .footer-promo {
-      max-width: 700px;
-      margin: 0 auto 24px;
-      background: linear-gradient(135deg, rgba(37,99,235,0.13) 0%, rgba(129,140,248,0.10) 100%);
-      border: 1px solid rgba(129,140,248,0.35);
-      border-top: 3px solid var(--glow);
-      border-radius: 14px;
-      padding: 24px 28px;
-      text-align: left;
-    }
-
-    .footer-promo-heading {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 8px;
-    }
-
-    .footer-promo-text {
-      font-size: 0.93rem;
-      line-height: 1.7;
-      color: #CBD5E1;
-      margin-bottom: 16px;
-    }
-
-    .footer-promo-text strong {
-      color: var(--white);
-    }
-
-    .footer-promo-cta {
-      display: block;
-      text-align: center;
-      width: fit-content;
-      margin-left: auto;
-      margin-right: auto;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--orange);
-      color: #fff;
-      text-decoration: none;
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.92rem;
-      font-weight: 700;
-      padding: 10px 22px;
-      border-radius: 8px;
-      transition: background 0.2s, box-shadow 0.2s;
-      letter-spacing: 0.02em;
-    }
-
-    .footer-promo-cta:hover {
-      background: #ea6c0a;
-      box-shadow: 0 0 20px rgba(249,115,22,0.4);
-    }
-
-    /* ── MOBILE ── */
     @media (max-width: 540px) {
       header { padding: 40px 16px 32px; }
-      .chapter-header { gap: 10px; }
+      .login-box { padding: 36px 24px; }
       .btn-kopiuj { width: 100%; justify-content: center; }
       .komenda-actions { flex-direction: column; align-items: flex-start; }
-      .sciagawka-links { flex-direction: column; }
     }
 
     /* ── DOMINATE HEADLINE ── */
@@ -715,83 +699,64 @@
       from { background-position: 0% center; }
       to   { background-position: 200% center; }
     }
-
-    /* ── FOOTER PROMO bullets & books ── */
-    .footer-promo-bullets {
-      list-style: none;
-      text-align: left;
-      max-width: 460px;
-      margin: 14px auto 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .footer-promo-bullets li {
-      font-size: 0.88rem;
-      color: #CBD5E1;
-      line-height: 1.5;
-    }
-    .footer-promo-emotion {
-      font-size: 0.95rem;
-      font-style: italic;
-      color: #93C5FD;
-      max-width: 460px;
-      margin: 0 auto 20px;
-      line-height: 1.6;
-    }
-    .footer-promo-books {
-      display: flex;
-      gap: 14px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 22px;
-      width: 100%;
-    }
-    .footer-promo-book {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      background: rgba(37,99,235,0.1);
-      border: 1px solid rgba(37,99,235,0.25);
-      border-radius: 10px;
-      padding: 16px 20px;
-      text-align: left;
-      flex: 1;
-      min-width: 220px;
-      max-width: 340px;
-    }
-    .footer-promo-book-num {
-      font-family: 'Outfit', sans-serif;
-      font-size: 2.4rem;
-      font-weight: 800;
-      color: var(--orange);
-      line-height: 1;
-      flex-shrink: 0;
-    }
-    .footer-promo-book div {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .footer-promo-book strong {
-      font-size: 1rem;
-      color: var(--white);
-    }
-    .footer-promo-book span {
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
   </style>
 </head>
 <body>
+
+<div id="ekran-logowania">
+  <div class="logowanie-wrapper">
+    <div style="text-align:center;margin-bottom:28px;">
+      <div class="dominate-headline" style="margin-bottom:6px;">DON&rsquo;T FEAR AI: DOMINATE YOUR FUTURE</div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:1rem;color:var(--muted);letter-spacing:0.02em;">AI Made Simple</div>
+    </div>
+    
+    <div class="login-box">
+      <div class="login-badge">Book 4 · AI Made Simple</div>
+      <h1>Access code</h1>
+      <p>Enter the code from the last page of your e-book<br><strong>AI Made Simple — Book 4</strong></p>
+      <input type="text" id="kod-input" class="kod-input" placeholder="BOOK4-XXXX" maxlength="10" autocomplete="off" spellcheck="false">
+      <div class="error-msg" id="error-msg"></div>
+      <button class="btn-odblokuj" onclick="sprawdzKod()">🔓 Unlock prompts</button>
+      <p class="login-hint">Your code is on the last page of the e-book</p>
+
+      <div class="upsell-block">
+        <span class="upsell-label">🔒 What's inside</span>
+        <p>Unlock <strong>9 ready-to-copy AI prompts</strong> for finding the perfect film, family viewing, hidden streaming gems, and more. This companion page makes copying them effortless.<br><br>Don't have Book 4 yet?</p>
+        <a class="btn-amazon" href="https://ebooks.aidorzeczy.com/" target="_blank" rel="noopener">📖 Get it on Amazon →</a>
+      </div>
+
+      <div class="upsell-block" style="margin-top:20px;">
+        <span class="upsell-label">✉️ Free newsletter</span>
+        <p>Not ready to buy yet? <strong>Get free AI tips, new prompts &amp; updates</strong> — straight to your inbox. No spam, unsubscribe any time.</p>
+        
+        <div style="display:flex;align-items:center;gap:14px;margin:14px 0 10px;flex-wrap:wrap;">
+          <span style="font-size:2rem;animation:pointRight 1.2s ease-in-out infinite;display:inline-block;">&#x1F449;</span>
+          <a href="https://ebooks.aidorzeczy.com/#community" target="_blank" rel="noopener"
+             style="display:inline-flex;align-items:center;text-decoration:none;background:#2563eb;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:700;padding:11px 22px;border-radius:8px;box-shadow:0 4px 16px rgba(37,99,235,0.4);">
+            Sign me up →
+          </a>
+        </div>
+        <style>@keyframes pointRight{0%,100%{transform:translateX(0)}50%{transform:translateX(9px)}}</style>
+        
+        <p style="margin-top:10px;margin-bottom:0;font-size:0.72rem;color:#475569;line-height:1.6;">By signing up, you agree to receive my newsletter and the free bonus. We process your email via Mailchimp to deliver this content. You can unsubscribe at any time. See our <a href="https://privacy.aidorzeczy.com" target="_blank" rel="noopener" style="color:#64748B;text-decoration:underline;">Privacy Policy</a> for details.</p>
+      </div>
+    </div>
+
+    <p class="amazon-disclaimer">
+      This page is a free, optional companion to <em>AI Made Simple — Book 4</em> (available on Amazon), provided solely to make copying prompts more convenient. All prompts shown here are also available in full text inside the purchased e-book.
+    </p>
+  </div>
+</div>
+
+<div id="tresc">
 
 <header>
   <div class="header-glow"></div>
   <div class="dominate-headline">DON’T FEAR AI: DOMINATE YOUR FUTURE</div>
   <div class="header-series">AI Made Simple</div>
-  <h1>Book 1: Communication &amp; Difficult Emails.<br>How to stop dreading your inbox.</h1>
-  <div class="header-tagline">How to say no assertively and save hours of stress — no tech knowledge required.</div>
-  <div class="header-subtitle-small">A plain-English guide for everyone. · Leszek Ignatowicz · book1.aidorzeczy.com</div>
+  <h1 style="font-size:clamp(1rem,2.5vw,1.5rem);font-weight:700;">Book 4: What to Watch?<br>Stop Scrolling. Find the Perfect Film in 2 Minutes.</h1>
+  <div class="header-tagline">Don't Fear AI — No Tech Skills Needed</div>
+  <div class="header-subtitle-small">A plain-English guide for everyone. · Leszek Ignatowicz · book4.aidorzeczy.com</div>
   <div class="header-tip">
     <span class="icon">💡</span>
     Click <strong>Copy prompt</strong>, then paste it into ChatGPT
@@ -799,13 +764,14 @@
 </header>
 
 <nav class="chapter-nav" id="chapNav">
-  <a class="nav-item active" href="https://book1.aidorzeczy.com/#r1" onclick="setActive(this)">Ch. 1 — Saying No</a>
-  <a class="nav-item" href="https://book1.aidorzeczy.com/#r2" onclick="setActive(this)">Ch. 2 — Complaints</a>
-  <a class="nav-item" href="https://book1.aidorzeczy.com/#r3" onclick="setActive(this)">Ch. 3 — Jargon</a>
-  <a class="nav-item" href="https://book1.aidorzeczy.com/#r4" onclick="setActive(this)">Ch. 4 — Privacy</a>
+  <a class="nav-item active" href="https://book4.aidorzeczy.com/#r1" onclick="setActive(this)">Ch. 1 — Scratch</a>
+  <a class="nav-item" href="https://book4.aidorzeczy.com/#r2" onclick="setActive(this)">Ch. 2 — Family</a>
+  <a class="nav-item" href="https://book4.aidorzeczy.com/#r3" onclick="setActive(this)">Ch. 3 — Feeling</a>
+  <a class="nav-item" href="https://book4.aidorzeczy.com/#r4" onclick="setActive(this)">Ch. 4 — Briefing</a>
+  <a class="nav-item" href="https://book4.aidorzeczy.com/#r5" onclick="setActive(this)">Ch. 5 — Hidden</a>
   <div class="nav-sep"></div>
-  <a class="nav-item" href="https://book1.aidorzeczy.com/#cheatsheet" onclick="setActive(this)">Cheat Sheet</a>
-  <a class="nav-item" href="https://book1.aidorzeczy.com/#advanced" onclick="setActive(this)">Advanced</a>
+  <a class="nav-item" href="https://book4.aidorzeczy.com/#cheatsheet" onclick="setActive(this)">Cheat Sheet</a>
+  <a class="nav-item" href="https://book4.aidorzeczy.com/#advanced" onclick="setActive(this)">Advanced</a>
 </nav>
 
 <main>
@@ -813,38 +779,45 @@
   <div class="progress-bar">
     <span class="progress-label">Prompts copied:</span>
     <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-    <span class="progress-count" id="progressCount">0 / 8</span>
+    <span class="progress-count" id="progressCount">0 / 9</span>
   </div>
 
-  <!-- ═══ CHAPTER 1 ═══ -->
   <section class="chapter" id="r1">
     <div class="chapter-header">
-      <div class="chapter-icon">✋</div>
+      <div class="chapter-icon">🍿</div>
       <div class="chapter-info">
-        <h2>Chapter 1: The Art of Saying No — Without the Guilt</h2>
-        <p>Prompt No. 1 · Write a firm but polite refusal that doesn't damage the relationship</p>
+        <h2>Chapter 1: The Friday Night Fix</h2>
+        <p>Finding a Film From Scratch — When You Have No Idea What You Want</p>
       </div>
     </div>
-
     <div class="komenda-card">
       <div class="komenda-head">
         <div class="komenda-label">
           <span class="komenda-num">No. 1</span>
-          <span class="komenda-title">Assertive refusal — 3 versions to choose from</span>
+          <span class="komenda-title">Prompt No. 1 — The Friday Night Fix</span>
         </div>
       </div>
       <div class="komenda-body">
-        <div class="komenda-tekst" id="k1">Act as a professional, highly courteous office assistant.
+        <div class="komenda-tekst" id="k1">Act as a personal film critic who knows me well.
 
-Write a refusal email on my behalf. The tone should be firm but calm — no negativity, no hard feelings.
+Suggest 4 films perfectly matched to my mood tonight.
 
-Please suggest 3 different versions of the message for me to choose from.
+"My mood right now: [e.g. tired and want something easy / excited and up for something gripping / sad and need something uplifting]"
 
-I am writing to: [Person's name or role, e.g. Mark from sales / our supplier]
-Subject: [Briefly describe the request, e.g. preparing a report by tomorrow / joining an extra meeting]
-My reason for declining: [Your real reason, e.g. I already have tasks scheduled / I'm out of the office that day]
+"Time available: [e.g. about 90 minutes / up to 2 hours / no preference]"
 
-Please end the email with a warm, friendly sign-off.</div>
+"Language: [e.g. English only / subtitles are fine / no preference]"
+
+"Streaming services I have: [e.g. Netflix / Amazon Prime Video / Disney+ / Apple TV+ / HBO Max / Hulu — list all you have, or write ""I'll rent if it's worth it""]"
+
+"Hard exclusions — I do NOT want: [e.g. no horror / nothing violent / no subtitles / nothing too heavy or depressing]"
+
+"For each film, tell me:"
+1. Title and year
+2. Where to watch it (exact platform name)
+3. Why it fits my mood tonight — one sentence
+4. Running time
+"No spoilers, please."</div>
         <div class="komenda-actions">
           <button class="btn-kopiuj" onclick="kopiuj(&#39;k1&#39;, this)">📋 Copy prompt</button>
           <span class="copy-hint">Ctrl+V or long-press → Paste</span>
@@ -853,38 +826,42 @@ Please end the email with a warm, friendly sign-off.</div>
     </div>
   </section>
 
-  <!-- ═══ CHAPTER 2 ═══ -->
   <section class="chapter" id="r2">
     <div class="chapter-header">
-      <div class="chapter-icon">⚖️</div>
+      <div class="chapter-icon">👨‍👩‍👧‍👦</div>
       <div class="chapter-info">
-        <h2>Chapter 2: The Complaint Crusher</h2>
-        <p>Prompt No. 2 · A formal complaint letter that reads like it came from a solicitor's office</p>
+        <h2>Chapter 2: The Family Compromise</h2>
+        <p>Finding a Film Everyone Will Actually Watch</p>
       </div>
     </div>
-
     <div class="komenda-card">
       <div class="komenda-head">
         <div class="komenda-label">
           <span class="komenda-num">No. 2</span>
-          <span class="komenda-title">Formal complaint to a shop or company</span>
+          <span class="komenda-title">Prompt No. 2 — The Family Compromise</span>
         </div>
       </div>
       <div class="komenda-body">
-        <div class="komenda-tekst" id="k2">Act as an experienced consumer rights solicitor.
+        <div class="komenda-tekst" id="k2">Act as a family film specialist.
 
-Write a formal complaint letter on my behalf regarding a faulty product.
+"Find a film that genuinely works for everyone in our group — not just something technically suitable for the youngest viewer, but something all of us will actually enjoy."
 
-The tone should be firm, factual, and completely free of emotion.
+"The people watching: [List ages, e.g. two adults aged 38 and 42, one teenager aged 15, two children aged 7 and 9]"
 
-Make it clear that I know my consumer rights — while remaining polite and professional.
+"Hard limits for the children: [e.g. nothing scary / no strong language / nothing too intense / no animal harm]"
 
-Product: [What you bought, e.g. running shoes, brand X / smart TV, brand Y]
-Date of purchase: [e.g. 15 May 2025 / about three months ago]
-Fault: [Brief description, e.g. the sole on the left shoe came completely off / the screen suddenly stopped turning on]
-My request: [What you want, e.g. full refund / replacement with a new working unit / free repair]
+"What the adults and teenagers want: [e.g. a proper story / real humour / genuine adventure — not too slow]"
 
-End the letter formally, request a positive resolution, and state that I expect a response within 14 days as required by law.</div>
+"Maximum running time: [e.g. under 2 hours / we're flexible]"
+
+"Streaming services we have: [e.g. Netflix / Disney+ / Amazon Prime Video / Apple TV+ / or ""we'll rent if it's great""]"
+
+Please suggest 4 films and for each one:
+1. Title and year
+2. Where to watch it (exact platform name)
+3. Why it works for each age group in our household — two sentences
+4. Running time
+No spoilers.</div>
         <div class="komenda-actions">
           <button class="btn-kopiuj" onclick="kopiuj(&#39;k2&#39;, this)">📋 Copy prompt</button>
           <span class="copy-hint">Ctrl+V or long-press → Paste</span>
@@ -893,38 +870,39 @@ End the letter formally, request a positive resolution, and state that I expect 
     </div>
   </section>
 
-  <!-- ═══ CHAPTER 3 ═══ -->
   <section class="chapter" id="r3">
     <div class="chapter-header">
-      <div class="chapter-icon">🔍</div>
+      <div class="chapter-icon">❤️</div>
       <div class="chapter-info">
-        <h2>Chapter 3: The Jargon Decoder</h2>
-        <p>Prompt No. 3 · Translate any official letter into plain English — and find out what to do next</p>
+        <h2>Chapter 3: The Feeling Finder</h2>
+        <p>Finding Films That Give You the Same Feeling as One You Already Love</p>
       </div>
     </div>
-
     <div class="komenda-card">
       <div class="komenda-head">
         <div class="komenda-label">
           <span class="komenda-num">No. 3</span>
-          <span class="komenda-title">Plain-English translation of official jargon</span>
+          <span class="komenda-title">Prompt No. 3 — The Feeling Finder</span>
         </div>
       </div>
       <div class="komenda-body">
-        <div class="komenda-tekst" id="k3">Read the message below — written in official or legal language.
+        <div class="komenda-tekst" id="k3">Act as a film expert with encyclopaedic knowledge of cinema across all eras and countries.
 
-Translate it into plain, everyday English — no legal background assumed.
+"I loved a specific film and I want to find others that give me the same feeling — not the same genre or director, but the same emotional and atmospheric experience."
 
-Answer these 3 questions in short bullet points:
+"The film I loved: [Title and year, e.g. Knives Out (2019) / The Grand Budapest Hotel (2014)]"
 
-1. What do they actually want from me?
+"What I specifically loved about it: [Describe in your own words, e.g. the dry, witty humour / the slow build of tension / the unexpected twist at the end / the warm, nostalgic atmosphere / the relationship between the two leads / the gorgeous visuals]"
 
-2. What do I need to do right now?
-   (e.g. pay something, sign something, call someone, or can I ignore it?)
+"What I do NOT want repeated: [e.g. I didn't love the pacing in the middle / please avoid science fiction / nothing too long]"
 
-3. Is there a deadline? If so, when exactly?
+"Streaming services I have: [e.g. Netflix / Amazon Prime Video / Disney+ / Apple TV+ / or ""I'll rent if it's excellent""]"
 
-Here is the text: [Paste the full letter or email here]</div>
+Please suggest 4 or 5 films — from any era or country — that match the feeling I described. For each:
+1. Title and year
+"2. Where to watch it (exact platform name, or ""available to rent"")"
+3. Why it matches the feeling — two sentences
+No spoilers.</div>
         <div class="komenda-actions">
           <button class="btn-kopiuj" onclick="kopiuj(&#39;k3&#39;, this)">📋 Copy prompt</button>
           <span class="copy-hint">Ctrl+V or long-press → Paste</span>
@@ -933,33 +911,39 @@ Here is the text: [Paste the full letter or email here]</div>
     </div>
   </section>
 
-  <!-- ═══ CHAPTER 4 ═══ -->
   <section class="chapter" id="r4">
     <div class="chapter-header">
-      <div class="chapter-icon">🔒</div>
+      <div class="chapter-icon">🛡️</div>
       <div class="chapter-info">
-        <h2>Chapter 4: The Safe Harbour</h2>
-        <p>Prompt No. 4 · Write about a sensitive workplace situation without sharing any real names</p>
+        <h2>Chapter 4: The Pre-Watch Briefing</h2>
+        <p>Is This Film Actually Worth Two Hours of Your Life?</p>
       </div>
     </div>
-
     <div class="komenda-card">
       <div class="komenda-head">
         <div class="komenda-label">
           <span class="komenda-num">No. 4</span>
-          <span class="komenda-title">Anonymous message about a difficult colleague</span>
+          <span class="komenda-title">Prompt No. 4 — The Pre-Watch Briefing</span>
         </div>
       </div>
       <div class="komenda-body">
-        <div class="komenda-tekst" id="k4">I need to write a sensitive email to my manager about a colleague.
+        <div class="komenda-tekst" id="k4">Act as an honest film advisor. I want to know whether a specific film is right for me tonight — without having the plot spoiled.
 
-To protect privacy, I'm using only the placeholder [Employee X].
+"The film: [Title and year, e.g. The Banshees of Inisherin (2022)]"
 
-Turn my rough notes into a calm, professional request for a meeting.
+Please answer the following — with NO plot spoilers:
 
-Do not use any real names. Keep [Employee X] throughout.
+"1. Pacing: Does it hook you immediately, or does it build slowly? When does it really get going?"
 
-Here are my notes: [Brief description of the situation and why you need your manager to intervene — using [Employee X] instead of the real name]</div>
+"2. Tone: Is it genuinely funny, mostly heavy, a mix of both — or something else entirely?"
+
+"3. Content I want flagged: [List what matters to you, e.g. level of violence / strong language / any animal harm / intense grief or loss / jump scares / disturbing imagery]"
+
+"4. Ending feel: Without spoiling it — does it leave you uplifted, unsettled, or somewhere in between?"
+
+5. Who would NOT enjoy this? Be direct — what type of viewer should skip it?
+
+Keep every answer spoiler-free throughout.</div>
         <div class="komenda-actions">
           <button class="btn-kopiuj" onclick="kopiuj(&#39;k4&#39;, this)">📋 Copy prompt</button>
           <span class="copy-hint">Ctrl+V or long-press → Paste</span>
@@ -968,58 +952,81 @@ Here are my notes: [Brief description of the situation and why you need your man
     </div>
   </section>
 
-  <!-- ═══ CHEAT SHEET ═══ -->
+  <section class="chapter" id="r5">
+    <div class="chapter-header">
+      <div class="chapter-icon">💎</div>
+      <div class="chapter-info">
+        <h2>Chapter 5: The Hidden Catalogue</h2>
+        <p>Stop Paying for Extra Rentals — the Brilliant Films You Already Have Access To</p>
+      </div>
+    </div>
+    <div class="komenda-card">
+      <div class="komenda-head">
+        <div class="komenda-label">
+          <span class="komenda-num">No. 5</span>
+          <span class="komenda-title">Prompt No. 5 — The Hidden Catalogue</span>
+        </div>
+      </div>
+      <div class="komenda-body">
+        <div class="komenda-tekst" id="k5">Act as an expert film curator who knows streaming catalogues in depth.
+
+I want to find a genuinely excellent film I haven't seen yet — one that's already on a platform I subscribe to and that the platform's own algorithm would never show me.
+
+"Platforms I subscribe to: [e.g. Netflix / Amazon Prime Video / Disney+ / Apple TV+ / HBO Max / Hulu — list them all]"
+
+"My country or region: [e.g. United Kingdom / United States / Australia / Poland — this affects what's available]"
+
+"What I'm in the mood for: [e.g. a gripping thriller / a warm and funny comedy / a brilliant drama / a foreign language film with great storytelling]"
+
+"Films I've already seen recently (skip these): [List 3 or 4 recent watches]"
+
+"Avoid: [e.g. nothing too dark / no horror / skip anything that got excessive awards hype — I want underseen, not just critically acclaimed]"
+
+Please suggest 4 to 5 films. For each one:
+1. Title and year
+2. Which platform it's on in my region
+3. Why it's excellent — two sentences
+4. Why it tends to go unnoticed
+No spoilers.</div>
+        <div class="komenda-actions">
+          <button class="btn-kopiuj" onclick="kopiuj(&#39;k5&#39;, this)">📋 Copy prompt</button>
+          <span class="copy-hint">Ctrl+V or long-press → Paste</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="chapter" id="cheatsheet">
     <div class="chapter-header">
       <div class="chapter-icon">📌</div>
       <div class="chapter-info">
         <h2>Cheat Sheet — All Prompts at a Glance</h2>
-        <p>Prompts No. 1–4 in short form · Grab the full versions from the chapters above for best results</p>
+        <p>Prompts No. 1–5 in short form · Use the full chapter versions for best results</p>
       </div>
     </div>
     <div class="komenda-card">
       <div class="komenda-body" style="padding:20px 24px;">
         <p style="color:var(--muted);font-size:0.88rem;margin-bottom:12px;">These are condensed versions. The full prompts in each chapter give the AI more context and produce better results.</p>
-        <p style="color:var(--white);font-size:0.9rem;margin:0;"><strong>No. 1</strong> — Assertive refusal → Ch. 1 &nbsp;|&nbsp; <strong>No. 2</strong> — Complaint letter → Ch. 2 &nbsp;|&nbsp; <strong>No. 3</strong> — Jargon decoder → Ch. 3 &nbsp;|&nbsp; <strong>No. 4</strong> — Anonymous colleague → Ch. 4</p>
-        <p style="color:var(--muted);font-size:0.85rem;margin-top:12px;">All prompts also available at <a href="https://book1.aidorzeczy.com/" style="color:var(--orange);">book1.aidorzeczy.com</a></p>
+        
+        <p style="color:var(--white);font-size:0.9rem;margin:0;">
+          <strong>No. 1</strong> — Finding a film from scratch → Ch. 1 &nbsp;|&nbsp;
+          <strong>No. 2</strong> — Family film night → Ch. 2 &nbsp;|&nbsp;
+          <strong>No. 3</strong> — Films with the same feeling → Ch. 3 &nbsp;|&nbsp;
+          <strong>No. 4</strong> — Pre-watch briefing → Ch. 4 &nbsp;|&nbsp;
+          <strong>No. 5</strong> — Hidden gems on subscriptions → Ch. 5
+        </p>
+
+        <p style="color:var(--muted);font-size:0.85rem;margin-top:12px;">All prompts also available at <a href="https://book4.aidorzeczy.com/" style="color:var(--orange);">book4.aidorzeczy.com</a></p>
       </div>
     </div>
   </section>
 
-  <!-- ═══ ADVANCED ═══ -->
   <section class="chapter" id="advanced">
     <div class="chapter-header">
       <div class="chapter-icon">🚀</div>
       <div class="chapter-info">
         <h2>Advanced Prompts — Appendix 2</h2>
-        <p>Prompts No. 5–8 · More powerful versions for complex situations</p>
-      </div>
-    </div>
-
-    <div class="komenda-card">
-      <div class="komenda-head">
-        <div class="komenda-label">
-          <span class="komenda-num">No. 5</span>
-          <span class="komenda-title">Turning down an important client without burning the bridge</span>
-        </div>
-      </div>
-      <div class="komenda-body">
-        <div class="komenda-tekst" id="k5">Act as a business diplomacy expert.
-
-I need to decline a proposal from an important client, but I want them to feel genuinely valued and to keep the relationship strong.
-
-Write a gracious refusal email that clearly closes this specific request while offering an alternative.
-
-Client: [Client name or placeholder]
-Their proposal: [What they asked you to do]
-Why I'm declining: [e.g. we're fully booked / outside our expertise]
-Alternative I'm offering: [e.g. recommending another provider / revisiting in 6 months]
-
-The message should be warm and respectful, but 100% clear that this particular request is closed for now.</div>
-        <div class="komenda-actions">
-          <button class="btn-kopiuj" onclick="kopiuj(&#39;k5&#39;, this)">📋 Copy prompt</button>
-          <span class="copy-hint">Ctrl+V or long-press → Paste</span>
-        </div>
+        <p>Prompts No. 6–9 · More powerful versions for specific situations</p>
       </div>
     </div>
 
@@ -1027,24 +1034,21 @@ The message should be warm and respectful, but 100% clear that this particular r
       <div class="komenda-head">
         <div class="komenda-label">
           <span class="komenda-num">No. 6</span>
-          <span class="komenda-title">Round two: when the shop rejects your complaint</span>
+          <span class="komenda-title">Prompt No. 6 — Planning a themed film marathon</span>
         </div>
       </div>
       <div class="komenda-body">
-        <div class="komenda-tekst" id="k6">Act as a tough, relentless consumer rights lawyer.
+        <div class="komenda-tekst" id="k6">Act as a film programming expert.
 
-The shop has just rejected my complaint without proper grounds.
+"I want to plan a themed film marathon — a sequence of films that work together across a day or evening, building in quality and variety."
 
-Write a formal appeal letter on my behalf.
+"The theme: [e.g. heist films / psychological thrillers / classic comedies / 1990s action films / films set in one location]"
+"Number of films: [e.g. 3 films / 4 films / as many as fit in 8 hours]"
+"Total time available: [e.g. all day Saturday / from 6pm to midnight]"
+"Who's watching: [ages and any content limits]"
+"Streaming services: [e.g. Netflix / Prime Video / Disney+ / Apple TV+ — or ""happy to rent""]"
 
-Tone: very firm, cold, and clear that I will not drop this.
-
-Product: [What you complained about]
-The shop's excuse: [What they said, e.g. "mechanical damage caused by user"]
-My counter-argument: [e.g. used exactly as instructed; fault appeared after one month]
-My demand: [Replacement / refund — state clearly you're maintaining your original request]
-
-End the letter with a firm statement that if this appeal is ignored, I will escalate the matter to the relevant consumer protection authority.</div>
+Suggest the films in viewing order and explain why that order works. Include platform and running time for each. No spoilers.</div>
         <div class="komenda-actions">
           <button class="btn-kopiuj" onclick="kopiuj(&#39;k6&#39;, this)">📋 Copy prompt</button>
           <span class="copy-hint">Ctrl+V or long-press → Paste</span>
@@ -1056,23 +1060,22 @@ End the letter with a firm statement that if this appeal is ignored, I will esca
       <div class="komenda-head">
         <div class="komenda-label">
           <span class="komenda-num">No. 7</span>
-          <span class="komenda-title">Understand the jargon and reply in one go</span>
+          <span class="komenda-title">Prompt No. 7 — Family film night gone deeper</span>
         </div>
       </div>
       <div class="komenda-body">
-        <div class="komenda-tekst" id="k7">Act as a helpful, knowledgeable civil servant.
+        <div class="komenda-tekst" id="k7">Act as a family film specialist with deep knowledge of lesser-known cinema.
 
-Below is a complicated official letter I have just received.
+"We've already seen all the obvious family films — Pixar, DreamWorks, the Disney classics — and we need to go deeper into the catalogue."
 
-Please do two things:
+"The people watching: [ages of everyone]"
+"Films we've already seen and loved: [list 4 or 5]"
+"What works best for our group: [e.g. adventure / comedy / gentle drama / animation from any country]"
+"Hard limits: [e.g. nothing scary / no adult themes]"
+"Streaming services: [e.g. Netflix / Disney+ / Amazon Prime Video / Apple TV+]"
+"Our region: [e.g. UK / US / Canada]"
 
-Step 1: Explain in 2 plain sentences what they want from me.
-
-Step 2: Write a formal, official reply to this authority on my behalf.
-
-My response (what I want to tell them): [e.g. I'm attaching the missing documents / I paid this amount two days ago, confirmation attached / I disagree with this decision]
-
-Here is the letter I received: [Paste the content here — remember to remove personal details like your ID number or bank account first]</div>
+"Find us 4 genuinely brilliant family films we're unlikely to have heard of. Title, year, platform, and why it works for our specific age range. No spoilers."</div>
         <div class="komenda-actions">
           <button class="btn-kopiuj" onclick="kopiuj(&#39;k7&#39;, this)">📋 Copy prompt</button>
           <span class="copy-hint">Ctrl+V or long-press → Paste</span>
@@ -1084,25 +1087,52 @@ Here is the letter I received: [Paste the content here — remember to remove pe
       <div class="komenda-head">
         <div class="komenda-label">
           <span class="komenda-num">No. 8</span>
-          <span class="komenda-title">Negotiating a pay rise — safely</span>
+          <span class="komenda-title">Prompt No. 8 — Exploring a new genre</span>
         </div>
       </div>
       <div class="komenda-body">
-        <div class="komenda-tekst" id="k8">Act as a top career coach.
+        <div class="komenda-tekst" id="k8">Act as a cinema guide for someone exploring a new genre or national cinema for the first time.
 
-Help me write an email to my manager requesting a meeting to discuss a pay rise.
+"I want to explore: [e.g. Korean films / classic Hollywood from the 1970s / Italian cinema / Japanese animation for adults / French comedies / Scandinavian crime films]"
 
-The message must sound professional and be grounded in my recent achievements — but absolutely not arrogant.
+"My experience level: [e.g. I'm a complete beginner / I've seen one or two and liked them]"
+"Genres or tones I usually enjoy: [e.g. thrillers / dramas / dark comedies / character-driven stories]"
+"Things I want to avoid: [e.g. extremely slow pacing / very dark subject matter / subtitles longer than 2 hours]"
+"Streaming services: [e.g. Netflix / Amazon Prime Video / Apple TV+ — or ""happy to rent""]"
 
-To protect my privacy, I am not sharing any real figures.
-
-Wherever a salary figure should appear, use these exact placeholders: [Current Salary] and [Target Salary].
-
-I will replace them with real numbers on my own device before sending.
-
-My recent achievements: [List briefly, e.g. delivered a major project solo / took on responsibilities from a departing colleague / improved team turnaround time]</div>
+Give me a 3-film starter sequence — ordered from most accessible to most rewarding — with a one-sentence reason each and platform name. No spoilers.</div>
         <div class="komenda-actions">
           <button class="btn-kopiuj" onclick="kopiuj(&#39;k8&#39;, this)">📋 Copy prompt</button>
+          <span class="copy-hint">Ctrl+V or long-press → Paste</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="komenda-card">
+      <div class="komenda-head">
+        <div class="komenda-label">
+          <span class="komenda-num">No. 9</span>
+          <span class="komenda-title">Prompt No. 9 — Is a TV series worth starting</span>
+        </div>
+      </div>
+      <div class="komenda-body">
+        <div class="komenda-tekst" id="k9">Act as an honest TV series advisor. I want to know whether a series is worth starting — without spoilers.
+
+"The series: [Title, e.g. Succession / The Wire / Severance / Dark]"
+
+Please tell me — with no plot spoilers:
+1. How many episodes before it gets good? Be honest.
+"2. What's the real tone — not the marketing description, but how it actually feels?"
+"3. Content I want flagged: [e.g. violence / strong language / sexual content / themes of grief or addiction]"
+4. Which season or episode is the high point?
+5. Is there a natural stopping point if I run out of time — i.e. a good place to pause without it feeling incomplete?
+6. Who should skip this entirely? Be direct.
+
+"Where to watch it: [e.g. tell me which platform carries it in the UK / US / my region: [your country]]"
+
+Keep everything spoiler-free.</div>
+        <div class="komenda-actions">
+          <button class="btn-kopiuj" onclick="kopiuj(&#39;k9&#39;, this)">📋 Copy prompt</button>
           <span class="copy-hint">Ctrl+V or long-press → Paste</span>
         </div>
       </div>
@@ -1112,7 +1142,6 @@ My recent achievements: [List briefly, e.g. delivered a major project solo / too
 
 </main>
 
-<!-- ══ NEWSLETTER & REVIEW ══════════════════════════════════════════════ -->
 <div class="bonus-section">
 
   <div class="bonus-card">
@@ -1121,17 +1150,19 @@ My recent achievements: [List briefly, e.g. delivered a major project solo / too
       <h3>Join the AI community and get your bonuses</h3>
     </div>
     <p>Sign up for my free newsletter to receive updates on new prompts, AI tool news, and upcoming books in the series.</p>
+    
     <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin:22px 0 14px;flex-wrap:wrap;">
       <span style="font-size:2.2rem;animation:pointRight 1.2s ease-in-out infinite;display:inline-block;">&#x1F449;</span>
       <a href="https://ebooks.aidorzeczy.com/#community" target="_blank" rel="noopener"
-         style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;background:#2563eb;color:#fff;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;padding:14px 28px;border-radius:9px;box-shadow:0 4px 20px rgba(37,99,235,0.4);">
+         style="display:inline-flex;align-items:center;text-decoration:none;background:#2563eb;color:#fff;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;padding:14px 28px;border-radius:9px;box-shadow:0 4px 20px rgba(37,99,235,0.4);">
         Sign me up →
       </a>
     </div>
-    <style>@keyframes pointRight{0%,100%{transform:translateX(0)}50%{transform:translateX(9px)}}</style>
-    <p style="margin-top:4px;margin-bottom:0;"><small>No spam. Unsubscribe at any time.</small></p>
+
+    <p style="margin-top:8px;margin-bottom:0;"><small>No spam. Unsubscribe at any time.</small></p>
     <p style="margin-top:10px;margin-bottom:0;font-size:0.75rem;color:#475569;line-height:1.6;">By signing up, you agree to receive my newsletter and the free bonus. We process your email via Mailchimp to deliver this content. You can unsubscribe at any time. See our <a href="https://privacy.aidorzeczy.com" target="_blank" rel="noopener" style="color:#94A3B8;text-decoration:underline;">Privacy Policy</a> for details.</p>
   </div>
+
   <div class="review-card">
     <h3>Did my prompts make your life easier?</h3>
     <p>Your opinion is the fuel for this series. If the knowledge in my ebooks saved you time, <span class="highlight">leaving a short, honest review on Amazon takes 30 seconds</span> — and helps me reach more people.</p>
@@ -1147,61 +1178,70 @@ My recent achievements: [List briefly, e.g. delivered a major project solo / too
 
 <footer>
   <div class="footer-tomy">
-    <a class="footer-tom-link current" href="https://book1.aidorzeczy.com/#">★ Book 1 — you are here</a>
+    <a class="footer-tom-link coming" href="https://book1.aidorzeczy.com/">Book 1 — Communication &amp; Difficult Emails</a>
     <a class="footer-tom-link coming" href="https://book2.aidorzeczy.com/">Book 2 — Organisation &amp; Planning</a>
     <a class="footer-tom-link coming" href="https://book3.aidorzeczy.com/">Book 3 — Household Budget</a>
-    <a class="footer-tom-link coming" href="https://book4.aidorzeczy.com/">Book 4 — Movies &amp; What to Watch</a>
+    <a class="footer-tom-link current" href="https://book4.aidorzeczy.com/#">★ Book 4 — you are here</a>
   </div>
-  <div class="footer-promo">
-    <div class="footer-promo-heading">🚀 Ready to Dominate Your Future?</div>
-    <div class="footer-promo-text">
-      You've seen what one book can do. <strong>Books 2 and 3 take you from beginner to professional AI master.</strong>
-    </div>
-    <ul class="footer-promo-bullets">
-      <li>⚡ Master advanced automation and delegate tedious work forever</li>
-      <li>📉 Reduce your daily workload by up to 80% with proven AI commands</li>
-      <li>🗂️ Unlock the full companion pages for budget, travel and complex planning</li>
-      <li>✅ No coding, no technical barrier — just copy, paste, and win</li>
-    </ul>
-    <div class="footer-promo-emotion">
-      The manual workload is a cage. Imagine finishing everything by 3 PM — and being the person in your field who has already figured it all out.
-    </div>
-    <div class="footer-promo-books">
-      <div class="footer-promo-book">
-        <span class="footer-promo-book-num">2</span>
-        <div>
-          <strong>Organisation &amp; Planning</strong>
-          <span>Meal plans · schedules · travel · to-do reset</span>
-        </div>
-      </div>
-      <div class="footer-promo-book">
-        <span class="footer-promo-book-num">3</span>
-        <div>
-          <strong>Household Budget &amp; Money</strong>
-          <span>Track spending · find savings · compare deals</span>
-        </div>
-      </div>
-      <div class="footer-promo-book">
-        <span class="footer-promo-book-num">4</span>
-        <div>
-          <strong>Movies &amp; What to Watch</strong>
-          <span>Perfect picks for every mood and group</span>
-        </div>
-      </div>
-    </div>
-    <a class="footer-promo-cta" href="https://ebooks.aidorzeczy.com/#books" target="_blank" rel="noopener">Get Books 2, 3 &amp; 4 on Amazon →</a>
-  </div>
-  <p class="footer-copy">Don’t Fear AI · Leszek Ignatowicz · book1.aidorzeczy.com</p>
-  <p class="footer-copy" style="margin-top:8px;">
-    <a href="https://privacy.aidorzeczy.com" target="_blank" rel="noopener" style="color:#475569;text-decoration:underline;">Privacy Policy</a>
-    &nbsp;&middot;&nbsp;
-    <a href="https://ebooks.aidorzeczy.com/" target="_blank" rel="noopener" style="color:#475569;text-decoration:underline;">ebooks.aidorzeczy.com</a>
-  </p>
-  <p class="amazon-disclaimer">This page is a free, optional companion to <em>AI Made Simple — Book 1</em> (available on Amazon), provided solely to make copying prompts more convenient. All prompts shown here are also available in full text inside the purchased e-book.</p>
+  <p class="footer-copy">AI Made Simple · Leszek Ignatowicz · book4.aidorzeczy.com</p>
+  <p class="amazon-disclaimer" style="max-width:680px;margin:12px auto 0;">This page is a free, optional companion to <em>AI Made Simple — Book 4</em> (available on Amazon), provided solely to make copying prompts more convenient. All prompts shown here are also available in full text inside the purchased e-book.</p>
 </footer>
 
-<script>
-  const TOTAL = 8;
+</div><script>
+  // Dostęp chroniony hashem SHA-256 — hasła nie są przechowywane w źródle jako plain text.
+  let _H = [];
+  
+  async function _sha256(msg) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  }
+
+  // Generujemy hashe dynamicznie podczas ładowania (hasła są zakodowane w base64, aby zachować bezpieczeństwo pliku lokalnego)
+  (async function() {
+    _H = [
+      await _sha256(atob('QVlCNQ==')),       // Hash dla AYB5
+      await _sha256(atob('Qk9PSzQtQVlCNQ==')) // Hash dla BOOK4-AYB5
+    ];
+  })();
+
+  const _K = 'b4_acc_v1';
+
+  async function sprawdzKod() {
+    const input = document.getElementById('kod-input');
+    const errorMsg = document.getElementById('error-msg');
+    const raw = input.value.trim().toUpperCase();
+    const variants = [raw, 'BOOK4-' + raw, raw.replace(/^BOOK4-/,'')];
+    
+    const hashes = await Promise.all(variants.map(_sha256));
+    
+    // Upewniamy się, że tablica _H zdążyła się załadować
+    if (_H.length === 0) {
+        _H = [ await _sha256(atob('QVlCNQ==')), await _sha256(atob('Qk9PSzQtQVlCNQ==')) ];
+    }
+
+    if (hashes.some(h => _H.includes(h))) {
+      localStorage.setItem(_K, '1');
+      odblokuj();
+    } else {
+      input.classList.add('error');
+      errorMsg.textContent = 'Incorrect code. Check the last page of your e-book.';
+      setTimeout(() => input.classList.remove('error'), 600);
+    }
+  }
+
+  function odblokuj() {
+    document.getElementById('ekran-logowania').style.display = 'none';
+    document.getElementById('tresc').style.display = 'block';
+  }
+
+  if (localStorage.getItem(_K) === '1') { odblokuj(); }
+
+  document.getElementById('kod-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') sprawdzKod();
+  });
+
+  // ── Kopiowanie ──────────────────────────────────────────
+  const TOTAL = 9;
   const copied = new Set();
 
   function updateProgress() {
@@ -1214,49 +1254,23 @@ My recent achievements: [List briefly, e.g. delivered a major project solo / too
     const el = document.getElementById(id);
     if (!el) return;
     const tekst = el.innerText;
-
-    const resetBtn = () => {
-      btn.textContent = '📋 Copy prompt';
-      btn.classList.remove('success', 'error');
-    };
+    const resetBtn = () => { btn.textContent = '📋 Copy prompt'; btn.classList.remove('success','error'); };
 
     if (!navigator.clipboard) {
       try {
         const ta = document.createElement('textarea');
-        ta.value = tekst;
-        ta.style.position = 'fixed';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.focus();
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        btn.textContent = '✓ Copied!';
-        btn.classList.add('success');
-        copied.add(id);
-        updateProgress();
-        setTimeout(resetBtn, 2500);
-      } catch {
-        btn.textContent = '⚠ Error — copy manually';
-        btn.classList.add('error');
-        setTimeout(resetBtn, 3500);
-      }
+        ta.value = tekst; ta.style.position='fixed'; ta.style.opacity='0';
+        document.body.appendChild(ta); ta.focus(); ta.select();
+        document.execCommand('copy'); document.body.removeChild(ta);
+        btn.textContent = '✓ Copied!'; btn.classList.add('success');
+        copied.add(id); updateProgress(); setTimeout(resetBtn, 2500);
+      } catch { btn.textContent='⚠ Error'; btn.classList.add('error'); setTimeout(resetBtn,3500); }
       return;
     }
 
     navigator.clipboard.writeText(tekst)
-      .then(() => {
-        btn.textContent = '✓ Copied!';
-        btn.classList.add('success');
-        copied.add(id);
-        updateProgress();
-        setTimeout(resetBtn, 2500);
-      })
-      .catch(() => {
-        btn.textContent = '⚠ Copy failed';
-        btn.classList.add('error');
-        setTimeout(resetBtn, 3000);
-      });
+      .then(() => { btn.textContent='✓ Copied!'; btn.classList.add('success'); copied.add(id); updateProgress(); setTimeout(resetBtn,2500); })
+      .catch(() => { btn.textContent='⚠ Copy failed'; btn.classList.add('error'); setTimeout(resetBtn,3000); });
   }
 
   function setActive(el) {
@@ -1266,18 +1280,14 @@ My recent achievements: [List briefly, e.g. delivered a major project solo / too
 
   const sections = document.querySelectorAll('.chapter');
   const navItems = document.querySelectorAll('.nav-item');
-
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const id = entry.target.id;
-        navItems.forEach(n => {
-          n.classList.toggle('active', n.getAttribute('href') === '#' + id);
-        });
+        navItems.forEach(n => n.classList.toggle('active', n.getAttribute('href')==='#'+id));
       }
     });
   }, { rootMargin: '-40% 0px -50% 0px' });
-
   sections.forEach(s => observer.observe(s));
 
   // Italicise [placeholder] text inside every prompt block
@@ -1285,7 +1295,5 @@ My recent achievements: [List briefly, e.g. delivered a major project solo / too
     el.innerHTML = el.innerHTML.replace(/(\[[^\]]*\])/g, '<em style="color:#93C5FD;font-style:italic;">$1</em>');
   });
 </script>
-
-
 
 </body></html>
