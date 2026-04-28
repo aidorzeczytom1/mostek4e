@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Made Simple · Book 4 · Ready-to-Copy Prompts</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com/">
-  <link href="./AI Made Simple · Book 4 · Ready-to-Copy Prompts_files/css2" rel="stylesheet">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+  
   <style>
     :root {
       --navy:       #0E1C36;
@@ -53,17 +57,9 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       padding: 24px;
       overflow-y: auto;
-    }
-
-    .logowanie-wrapper {
-      margin: auto;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px 0;
     }
 
     .login-box {
@@ -310,16 +306,22 @@
       margin-bottom: 18px;
     }
 
+    /* POPRAWKA DLA IPHONE / SAFARI */
     header h1 {
-      font-family: 'Outfit', sans-serif;
-      font-size: clamp(2rem, 5vw, 2.9rem);
+      font-family: 'Outfit', Arial, sans-serif;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
       font-weight: 800;
-      line-height: 1.5;
-      margin-bottom: 8px;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    header h1 span {
+      display: block;
       background: linear-gradient(135deg, #fff 30%, var(--glow) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      transform: translateZ(0); 
     }
 
     header .subtitle {
@@ -418,16 +420,18 @@
       box-shadow: 0 4px 24px rgba(37,99,235,0.08);
     }
 
+    /* POPRAWIONE ZAWIJANIE TYTUŁÓW PROMPTÓW */
     .komenda-head {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
+      justify-content: space-between;
       padding: 14px 18px 10px;
       gap: 12px;
     }
 
     .komenda-label {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 10px;
       flex: 1;
       min-width: 0;
@@ -444,15 +448,14 @@
       padding: 2px 8px;
       flex-shrink: 0;
       letter-spacing: 0.05em;
+      margin-top: 1px;
     }
 
     .komenda-title {
       font-size: 0.93rem;
       font-weight: 600;
       color: var(--white);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      line-height: 1.4;
     }
 
     .komenda-body { padding: 0 18px 16px; }
@@ -468,6 +471,11 @@
       white-space: pre-wrap;
       margin-bottom: 12px;
       font-family: 'DM Sans', sans-serif;
+    }
+    
+    .komenda-tekst .placeholder {
+      color: #93C5FD;
+      font-style: italic;
     }
 
     .komenda-actions {
@@ -490,11 +498,12 @@
       cursor: pointer;
       transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
       font-family: 'DM Sans', sans-serif;
+      letter-spacing: 0.01em;
     }
 
     .btn-kopiuj:hover { background: var(--blue-light); box-shadow: 0 0 16px rgba(37,99,235,0.4); }
     .btn-kopiuj:active { transform: scale(0.96); }
-    .btn-kopiuj.success { background: var(--green-dim); }
+    .btn-kopiuj.success { background: var(--green-dim); box-shadow: 0 0 16px rgba(34,197,94,0.3); }
     .btn-kopiuj.error   { background: #991B1B; }
 
     .copy-hint { font-size: 0.78rem; color: var(--muted); }
@@ -599,7 +608,10 @@
       margin-bottom: 12px;
     }
 
-    .bonus-card-icon { font-size: 1.5rem; line-height: 1; }
+    .bonus-card-icon {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
 
     .bonus-card h3 {
       font-family: 'Outfit', sans-serif;
@@ -615,7 +627,10 @@
       margin-bottom: 20px;
     }
 
-    .bonus-card p small { color: #475569; font-size: 0.78rem; }
+    .bonus-card p small {
+      color: #475569;
+      font-size: 0.78rem;
+    }
 
     .review-card {
       background: var(--navy-card);
@@ -641,7 +656,10 @@
       margin-bottom: 20px;
     }
 
-    .review-card p .highlight { color: var(--orange); font-weight: 600; }
+    .review-card p .highlight {
+      color: var(--orange);
+      font-weight: 600;
+    }
 
     .review-buttons {
       display: flex;
@@ -714,7 +732,7 @@
       <div class="login-badge">Book 4 · AI Made Simple</div>
       <h1>Access code</h1>
       <p>Enter the code from the last page of your e-book<br><strong>AI Made Simple — Book 4</strong></p>
-      <input type="text" id="kod-input" class="kod-input" placeholder="BOOK4-XXXX" maxlength="10" autocomplete="off" spellcheck="false">
+      <input type="password" id="kod-input" class="kod-input" placeholder="BOOK4-XXXX" maxlength="10" autocomplete="off" spellcheck="false">
       <div class="error-msg" id="error-msg"></div>
       <button class="btn-odblokuj" onclick="sprawdzKod()">🔓 Unlock prompts</button>
       <p class="login-hint">Your code is on the last page of the e-book</p>
@@ -738,7 +756,7 @@
         </div>
         <style>@keyframes pointRight{0%,100%{transform:translateX(0)}50%{transform:translateX(9px)}}</style>
         
-        <p style="margin-top:10px;margin-bottom:0;font-size:0.72rem;color:#475569;line-height:1.6;">By signing up, you agree to receive my newsletter and the free bonus. We process your email via Mailchimp to deliver this content. You can unsubscribe at any time. See our <a href="https://privacy.aidorzeczy.com" target="_blank" rel="noopener" style="color:#64748B;text-decoration:underline;">Privacy Policy</a> for details.</p>
+        <p style="margin-top:10px;margin-bottom:0;font-size:0.72rem;color:#475569;line-height:1.6;">By signing up, you agree to receive my newsletter and the free bonus. We process your email via MailerLite to deliver this content. You can unsubscribe at any time. See our <a href="https://privacy.aidorzeczy.com" target="_blank" rel="noopener" style="color:#64748B;text-decoration:underline;">Privacy Policy</a> for details.</p>
       </div>
     </div>
 
@@ -754,7 +772,10 @@
   <div class="header-glow"></div>
   <div class="dominate-headline">DON’T FEAR AI: DOMINATE YOUR FUTURE</div>
   <div class="header-series">AI Made Simple</div>
-  <h1 style="font-size:clamp(1rem,2.5vw,1.5rem);font-weight:700;">Book 4: What to Watch?<br>Stop Scrolling. Find the Perfect Film in 2 Minutes.</h1>
+  <h1>
+    <span>Book 4: What to Watch?</span>
+    <span>Stop Scrolling. Find the Perfect Film in 2 Minutes.</span>
+  </h1>
   <div class="header-tagline">Don't Fear AI — No Tech Skills Needed</div>
   <div class="header-subtitle-small">A plain-English guide for everyone. · Leszek Ignatowicz · book4.aidorzeczy.com</div>
   <div class="header-tip">
@@ -819,7 +840,7 @@ Suggest 4 films perfectly matched to my mood tonight.
 4. Running time
 "No spoilers, please."</div>
         <div class="komenda-actions">
-          <button class="btn-kopiuj" onclick="kopiuj(&#39;k1&#39;, this)">📋 Copy prompt</button>
+          <button class="btn-kopiuj" onclick="kopiuj('k1', this)">📋 Copy prompt</button>
           <span class="copy-hint">Ctrl+V or long-press → Paste</span>
         </div>
       </div>
@@ -863,7 +884,7 @@ Please suggest 4 films and for each one:
 4. Running time
 No spoilers.</div>
         <div class="komenda-actions">
-          <button class="btn-kopiuj" onclick="kopiuj(&#39;k2&#39;, this)">📋 Copy prompt</button>
+          <button class="btn-kopiuj" onclick="kopiuj('k2', this)">📋 Copy prompt</button>
           <span class="copy-hint">Ctrl+V or long-press → Paste</span>
         </div>
       </div>
@@ -904,7 +925,7 @@ Please suggest 4 or 5 films — from any era or country — that match the feeli
 3. Why it matches the feeling — two sentences
 No spoilers.</div>
         <div class="komenda-actions">
-          <button class="btn-kopiuj" onclick="kopiuj(&#39;k3&#39;, this)">📋 Copy prompt</button>
+          <button class="btn-kopiuj" onclick="kopiuj('k3', this)">📋 Copy prompt</button>
           <span class="copy-hint">Ctrl+V or long-press → Paste</span>
         </div>
       </div>
@@ -945,7 +966,7 @@ Please answer the following — with NO plot spoilers:
 
 Keep every answer spoiler-free throughout.</div>
         <div class="komenda-actions">
-          <button class="btn-kopiuj" onclick="kopiuj(&#39;k4&#39;, this)">📋 Copy prompt</button>
+          <button class="btn-kopiuj" onclick="kopiuj('k4', this)">📋 Copy prompt</button>
           <span class="copy-hint">Ctrl+V or long-press → Paste</span>
         </div>
       </div>
@@ -989,7 +1010,7 @@ Please suggest 4 to 5 films. For each one:
 4. Why it tends to go unnoticed
 No spoilers.</div>
         <div class="komenda-actions">
-          <button class="btn-kopiuj" onclick="kopiuj(&#39;k5&#39;, this)">📋 Copy prompt</button>
+          <button class="btn-kopiuj" onclick="kopiuj('k5', this)">📋 Copy prompt</button>
           <span class="copy-hint">Ctrl+V or long-press → Paste</span>
         </div>
       </div>
@@ -1050,7 +1071,7 @@ No spoilers.</div>
 
 Suggest the films in viewing order and explain why that order works. Include platform and running time for each. No spoilers.</div>
         <div class="komenda-actions">
-          <button class="btn-kopiuj" onclick="kopiuj(&#39;k6&#39;, this)">📋 Copy prompt</button>
+          <button class="btn-kopiuj" onclick="kopiuj('k6', this)">📋 Copy prompt</button>
           <span class="copy-hint">Ctrl+V or long-press → Paste</span>
         </div>
       </div>
@@ -1077,7 +1098,7 @@ Suggest the films in viewing order and explain why that order works. Include pla
 
 "Find us 4 genuinely brilliant family films we're unlikely to have heard of. Title, year, platform, and why it works for our specific age range. No spoilers."</div>
         <div class="komenda-actions">
-          <button class="btn-kopiuj" onclick="kopiuj(&#39;k7&#39;, this)">📋 Copy prompt</button>
+          <button class="btn-kopiuj" onclick="kopiuj('k7', this)">📋 Copy prompt</button>
           <span class="copy-hint">Ctrl+V or long-press → Paste</span>
         </div>
       </div>
@@ -1102,7 +1123,7 @@ Suggest the films in viewing order and explain why that order works. Include pla
 
 Give me a 3-film starter sequence — ordered from most accessible to most rewarding — with a one-sentence reason each and platform name. No spoilers.</div>
         <div class="komenda-actions">
-          <button class="btn-kopiuj" onclick="kopiuj(&#39;k8&#39;, this)">📋 Copy prompt</button>
+          <button class="btn-kopiuj" onclick="kopiuj('k8', this)">📋 Copy prompt</button>
           <span class="copy-hint">Ctrl+V or long-press → Paste</span>
         </div>
       </div>
@@ -1132,7 +1153,7 @@ Please tell me — with no plot spoilers:
 
 Keep everything spoiler-free.</div>
         <div class="komenda-actions">
-          <button class="btn-kopiuj" onclick="kopiuj(&#39;k9&#39;, this)">📋 Copy prompt</button>
+          <button class="btn-kopiuj" onclick="kopiuj('k9', this)">📋 Copy prompt</button>
           <span class="copy-hint">Ctrl+V or long-press → Paste</span>
         </div>
       </div>
@@ -1160,7 +1181,7 @@ Keep everything spoiler-free.</div>
     </div>
 
     <p style="margin-top:8px;margin-bottom:0;"><small>No spam. Unsubscribe at any time.</small></p>
-    <p style="margin-top:10px;margin-bottom:0;font-size:0.75rem;color:#475569;line-height:1.6;">By signing up, you agree to receive my newsletter and the free bonus. We process your email via Mailchimp to deliver this content. You can unsubscribe at any time. See our <a href="https://privacy.aidorzeczy.com" target="_blank" rel="noopener" style="color:#94A3B8;text-decoration:underline;">Privacy Policy</a> for details.</p>
+    <p style="margin-top:10px;margin-bottom:0;font-size:0.75rem;color:#475569;line-height:1.6;">By signing up, you agree to receive my newsletter and the free bonus. We process your email via MailerLite to deliver this content. You can unsubscribe at any time. See our <a href="https://privacy.aidorzeczy.com" target="_blank" rel="noopener" style="color:#94A3B8;text-decoration:underline;">Privacy Policy</a> for details.</p>
   </div>
 
   <div class="review-card">
@@ -1187,7 +1208,9 @@ Keep everything spoiler-free.</div>
   <p class="amazon-disclaimer" style="max-width:680px;margin:12px auto 0;">This page is a free, optional companion to <em>AI Made Simple — Book 4</em> (available on Amazon), provided solely to make copying prompts more convenient. All prompts shown here are also available in full text inside the purchased e-book.</p>
 </footer>
 
-</div><script>
+</div>
+
+<script>
   // Dostęp chroniony hashem SHA-256 — hasła nie są przechowywane w źródle jako plain text.
   let _H = [];
   
@@ -1204,7 +1227,7 @@ Keep everything spoiler-free.</div>
     ];
   })();
 
-  const _K = 'b4_acc_v1';
+  const _K = 'b4_acc_v2';
 
   async function sprawdzKod() {
     const input = document.getElementById('kod-input');
@@ -1212,12 +1235,12 @@ Keep everything spoiler-free.</div>
     const raw = input.value.trim().toUpperCase();
     const variants = [raw, 'BOOK4-' + raw, raw.replace(/^BOOK4-/,'')];
     
-    const hashes = await Promise.all(variants.map(_sha256));
-    
     // Upewniamy się, że tablica _H zdążyła się załadować
     if (_H.length === 0) {
         _H = [ await _sha256(atob('QVlCNQ==')), await _sha256(atob('Qk9PSzQtQVlCNQ==')) ];
     }
+    
+    const hashes = await Promise.all(variants.map(_sha256));
 
     if (hashes.some(h => _H.includes(h))) {
       localStorage.setItem(_K, '1');
@@ -1254,17 +1277,44 @@ Keep everything spoiler-free.</div>
     const el = document.getElementById(id);
     if (!el) return;
     const tekst = el.innerText;
-    const resetBtn = () => { btn.textContent = '📋 Copy prompt'; btn.classList.remove('success','error'); };
+    
+    const resetBtn = () => { 
+        btn.textContent = '📋 Copy prompt'; 
+        btn.classList.remove('success','error'); 
+    };
 
-    if (!navigator.clipboard) {
+    if (!navigator.clipboard || window.isSecureContext === false) {
+      const ta = document.createElement('textarea');
+      ta.value = tekst;
+      
+      ta.style.position = 'fixed';
+      ta.style.top = '-99999px';
+      ta.style.left = '-99999px';
+      ta.style.width = '1px';
+      ta.style.height = '1px';
+      ta.style.padding = '0';
+      ta.style.border = 'none';
+      ta.style.outline = 'none';
+      ta.style.boxShadow = 'none';
+      ta.style.background = 'transparent';
+      
+      document.body.appendChild(ta);
+      
       try {
-        const ta = document.createElement('textarea');
-        ta.value = tekst; ta.style.position='fixed'; ta.style.opacity='0';
-        document.body.appendChild(ta); ta.focus(); ta.select();
-        document.execCommand('copy'); document.body.removeChild(ta);
-        btn.textContent = '✓ Copied!'; btn.classList.add('success');
-        copied.add(id); updateProgress(); setTimeout(resetBtn, 2500);
-      } catch { btn.textContent='⚠ Error'; btn.classList.add('error'); setTimeout(resetBtn,3500); }
+        ta.focus();
+        ta.select();
+        document.execCommand('copy');
+        btn.textContent = '✓ Copied!';
+        btn.classList.add('success');
+        copied.add(id);
+        updateProgress();
+      } catch (err) {
+        btn.textContent = '⚠ Error — copy manually';
+        btn.classList.add('error');
+      } finally {
+        document.body.removeChild(ta);
+        setTimeout(resetBtn, 2500);
+      }
       return;
     }
 
@@ -1296,4 +1346,5 @@ Keep everything spoiler-free.</div>
   });
 </script>
 
-</body></html>
+</body>
+</html>
