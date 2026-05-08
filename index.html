@@ -717,6 +717,27 @@
       from { background-position: 0% center; }
       to   { background-position: 200% center; }
     }
+
+    /* ── HUB NEWSLETTER BTN ── */
+    .btn-newsletter-hub {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue);
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 11px 26px;
+      border-radius: 8px;
+      transition: background 0.15s, box-shadow 0.15s;
+      letter-spacing: 0.02em;
+    }
+    .btn-newsletter-hub:hover {
+      background: var(--blue-light);
+      box-shadow: 0 0 16px rgba(37,99,235,0.4);
+    }
   </style>
 </head>
 <body>
@@ -746,17 +767,12 @@
       <div class="upsell-block" style="margin-top:20px;">
         <span class="upsell-label">✉️ Free newsletter</span>
         <p>Not ready to buy yet? <strong>Get free AI tips, new prompts &amp; updates</strong> — straight to your inbox. No spam, unsubscribe any time.</p>
-        
-        <div style="display:flex;align-items:center;gap:14px;margin:14px 0 10px;flex-wrap:wrap;">
-          <span style="font-size:2rem;animation:pointRight 1.2s ease-in-out infinite;display:inline-block;">&#x1F449;</span>
-          <a href="https://ebooks.aidorzeczy.com/#community" target="_blank" rel="noopener"
-             style="display:inline-flex;align-items:center;text-decoration:none;background:#2563eb;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:700;padding:11px 22px;border-radius:8px;box-shadow:0 4px 16px rgba(37,99,235,0.4);">
-            Sign me up →
+        <div style="text-align:center;margin-top:14px;">
+          <a class="btn-newsletter-hub" href="https://newsletter.aidorzeczy.com/" target="_blank" rel="noopener noreferrer">
+            👉 Sign me up &rarr;
           </a>
         </div>
-        <style>@keyframes pointRight{0%,100%{transform:translateX(0)}50%{transform:translateX(9px)}}</style>
-        
-        <p style="margin-top:10px;margin-bottom:0;font-size:0.72rem;color:#475569;line-height:1.6;">By signing up, you agree to receive my newsletter and the free bonus. We process your email via MailerLite to deliver this content. You can unsubscribe at any time. See our <a href="https://privacy.aidorzeczy.com" target="_blank" rel="noopener" style="color:#64748B;text-decoration:underline;">Privacy Policy</a> for details.</p>
+        <p style="margin-top:12px;margin-bottom:0;font-size:0.72rem;color:#475569;line-height:1.6;">By signing up, you agree to receive my newsletter and the free bonus. We process your email via MailerLite to deliver this content. You can unsubscribe at any time. See our <a href="https://privacy.aidorzeczy.com" target="_blank" rel="noopener" style="color:#64748B;text-decoration:underline;">Privacy Policy</a> for details.</p>
       </div>
     </div>
 
@@ -1168,20 +1184,17 @@ Keep everything spoiler-free.</div>
   <div class="bonus-card">
     <div class="bonus-card-header">
       <div class="bonus-card-icon">✉️</div>
-      <h3>Join the AI community and get your bonuses</h3>
+      <h3>Join the AI community &amp; get your bonuses</h3>
     </div>
-    <p>Sign up for my free newsletter to receive updates on new prompts, AI tool news, and upcoming books in the series.</p>
-    
-    <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin:22px 0 14px;flex-wrap:wrap;">
-      <span style="font-size:2.2rem;animation:pointRight 1.2s ease-in-out infinite;display:inline-block;">&#x1F449;</span>
-      <a href="https://ebooks.aidorzeczy.com/#community" target="_blank" rel="noopener"
-         style="display:inline-flex;align-items:center;text-decoration:none;background:#2563eb;color:#fff;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;padding:14px 28px;border-radius:9px;box-shadow:0 4px 20px rgba(37,99,235,0.4);">
-        Sign me up →
+    <p>
+      Get practical AI tips, updates on new books, and exclusive discounts — straight to your inbox.<br>
+      <small>No spam. Unsubscribe at any time.</small>
+    </p>
+    <div style="text-align:center;margin-top:4px;">
+      <a class="btn-newsletter-hub" href="https://newsletter.aidorzeczy.com/" target="_blank" rel="noopener noreferrer">
+        👉 Sign me up &rarr;
       </a>
     </div>
-
-    <p style="margin-top:8px;margin-bottom:0;"><small>No spam. Unsubscribe at any time.</small></p>
-    <p style="margin-top:10px;margin-bottom:0;font-size:0.75rem;color:#475569;line-height:1.6;">By signing up, you agree to receive my newsletter and the free bonus. We process your email via MailerLite to deliver this content. You can unsubscribe at any time. See our <a href="https://privacy.aidorzeczy.com" target="_blank" rel="noopener" style="color:#94A3B8;text-decoration:underline;">Privacy Policy</a> for details.</p>
   </div>
 
   <div class="review-card">
